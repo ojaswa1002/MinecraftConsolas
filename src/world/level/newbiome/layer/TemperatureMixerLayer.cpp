@@ -1,0 +1,34 @@
+#include "TemperatureMixerLayer.h"
+
+#include <memory>
+
+#include "util/console/ArrayWithLength.h"
+#include "world/level/biome/Biome.h"
+
+#include "IntCache.h"
+#include "Layer.h"
+
+TemperatureMixerLayer::TemperatureMixerLayer(
+    std::shared_ptr<Layer> temp,
+    std::shared_ptr<Layer> parent,
+    int                    layer
+)
+: Layer(0) {
+    this->parent = parent;
+    this->temp   = temp;
+    this->layer  = layer;
+}
+
+intArray TemperatureMixerLayer::getArea(int xo, int yo, int w, int h) {
+    intArray b = parent->getArea(xo, yo, w, h);
+    intArray t = temp->getArea(xo, yo, w, h);
+
+    intArray result = IntCache::allocate(w * h);
+    for (int i = 0; i < w * h; i++) {
+        result[i] = t[i]
+                  + (Biome::biomes[b[i]]->getTemperatureInt() - t[i])
+                        / (layer * 2 + 1);
+    }
+
+    return result;
+}

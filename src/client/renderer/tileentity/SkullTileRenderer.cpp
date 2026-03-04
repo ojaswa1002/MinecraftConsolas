@@ -1,0 +1,140 @@
+#include "SkullTileRenderer.h"
+
+#include <cstddef>
+#include <memory>
+
+#include <4J_Render.h>
+
+#include "client/model/SkeletonHeadModel.h"
+#include "client/model/geom/Model.h"
+#include "client/renderer/Stubs.h"
+#include "client/renderer/Textures.h"
+#include "world/Facing.h"
+#include "world/level/tile/SkullTile.h"
+#include "world/level/tile/entity/SkullTileEntity.h"
+#include "world/level/tile/entity/TileEntity.h"
+
+SkullTileRenderer* SkullTileRenderer::instance = NULL;
+
+SkullTileRenderer::SkullTileRenderer() {
+    skeletonModel = new SkeletonHeadModel(0, 0, 64, 32);
+    zombieModel   = new SkeletonHeadModel(0, 0, 64, 64);
+}
+
+SkullTileRenderer::~SkullTileRenderer() {
+    delete skeletonModel;
+    delete zombieModel;
+}
+
+void SkullTileRenderer::render(
+    std::shared_ptr<TileEntity> _skull,
+    double                      x,
+    double                      y,
+    double                      z,
+    float                       a,
+    bool                        setColor,
+    float                       alpha,
+    bool                        useCompiled
+) {
+    std::shared_ptr<SkullTileEntity> skull =
+        dynamic_pointer_cast<SkullTileEntity>(_skull);
+    renderSkull(
+        (float)x,
+        (float)y,
+        (float)z,
+        skull->getData() & SkullTile::PLACEMENT_MASK,
+        skull->getRotation() * 360 / 16.0f,
+        skull->getSkullType(),
+        skull->getExtraType()
+    );
+}
+
+void SkullTileRenderer::init(
+    TileEntityRenderDispatcher* tileEntityRenderDispatcher
+) {
+    TileEntityRenderer::init(tileEntityRenderDispatcher);
+    instance = this;
+}
+
+void SkullTileRenderer::renderSkull(
+    float               x,
+    float               y,
+    float               z,
+    int                 face,
+    float               rot,
+    int                 type,
+    const std::wstring& extra
+) {
+    Model* model = skeletonModel;
+
+    switch (type) {
+    case SkullTileEntity::TYPE_WITHER:
+        bindTexture(TN_MOB_WITHER_SKELETON);
+        break;
+    case SkullTileEntity::TYPE_ZOMBIE:
+        bindTexture(TN_MOB_ZOMBIE);
+        // model = zombieModel;
+        break;
+    case SkullTileEntity::TYPE_CHAR:
+        // if (!extra.empty())
+        //{
+        //	std::wstring url = "http://skins.minecraft.net/MinecraftSkins/" +
+        // StringUtil.stripColor(extra) + ".png";
+
+        //	if
+        //(!instance->tileEntityRenderDispatcher->textures->hasHttpTexture(url))
+        //	{
+        //		instance->tileEntityRenderDispatcher->textures->addHttpTexture(url,
+        // new MobSkinTextureProcessor());
+        //	}
+
+        //	bindTexture(url, "/mob/char.png");
+        //}
+        // else
+        { bindTexture(TN_MOB_CHAR); }
+        break;
+    case SkullTileEntity::TYPE_CREEPER:
+        bindTexture(TN_MOB_CREEPER);
+        break;
+    case SkullTileEntity::TYPE_SKELETON:
+    default:
+        bindTexture(TN_MOB_SKELETON);
+        break;
+    }
+
+    glPushMatrix();
+    glDisable(GL_CULL_FACE);
+
+    if (face != Facing::UP) {
+        switch (face) {
+        case Facing::NORTH:
+            glTranslatef(x + 0.5f, y + .25f, z + 0.74f);
+            break;
+        case Facing::SOUTH:
+            glTranslatef(x + 0.5f, y + .25f, z + 0.26f);
+            rot = 180.0f;
+            break;
+        case Facing::WEST:
+            glTranslatef(x + 0.74f, y + .25f, z + 0.5f);
+            rot = 270.0f;
+            break;
+        case Facing::EAST:
+        default:
+            glTranslatef(x + 0.26f, y + .25f, z + 0.5f);
+            rot = 90.0f;
+            break;
+        }
+    } else {
+        glTranslatef(x + 0.5f, y, z + 0.5f);
+    }
+
+    float scale = 1 / 16.0f;
+    glEnable(GL_RESCALE_NORMAL);
+    glScalef(-1, -1, 1);
+
+    glEnable(GL_ALPHA_TEST);
+
+    model->render(nullptr, 0, 0, 0, rot, 0, scale, true);
+
+    glPopMatrix();
+}

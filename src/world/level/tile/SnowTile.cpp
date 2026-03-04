@@ -1,0 +1,26 @@
+#include "SnowTile.h"
+
+#include "world/item/Item.h"
+#include "world/level/Level.h"
+#include "world/level/LightLayer.h"
+#include "world/level/material/Material.h"
+
+SnowTile::SnowTile(int id) : Tile(id, Material::snow) { setTicking(true); }
+
+
+int SnowTile::getResource(int data, Random* random, int playerBonusLevel) {
+    return Item::snowBall->id;
+}
+
+int SnowTile::getResourceCount(Random* random) { return 4; }
+
+void SnowTile::tick(Level* level, int x, int y, int z, Random* random) {
+    if (level->getBrightness(LightLayer::Block, x, y, z) > 11) {
+        this->spawnResources(level, x, y, z, level->getData(x, y, z), 0);
+        level->setTile(x, y, z, 0);
+    }
+}
+
+bool SnowTile::shouldTileTick(Level* level, int x, int y, int z) {
+    return level->getBrightness(LightLayer::Block, x, y, z) > 11;
+}

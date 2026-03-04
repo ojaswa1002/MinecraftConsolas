@@ -1,0 +1,37 @@
+#pragma once
+
+#include <vector>
+
+#include <windows.h>
+
+#include <mss.h>
+
+#include "client/skins/SkinBox.h"
+
+#include "DLCFile.h"
+#include "DLCManager.h"
+
+class DLCSkinFile : public DLCFile {
+private:
+    std::wstring           m_displayName;
+    std::wstring           m_themeName;
+    std::wstring           m_cape;
+    unsigned int           m_uiAnimOverrideBitmask;
+    bool                   m_bIsFree;
+    std::vector<SKIN_BOX*> m_AdditionalBoxes;
+
+public:
+    DLCSkinFile(const std::wstring& path);
+
+    virtual void addData(PBYTE pbData, DWORD dwBytes);
+    virtual void
+    addParameter(DLCManager::EDLCParameterType type, const std::wstring& value);
+
+    virtual std::wstring
+                 getParameterAsString(DLCManager::EDLCParameterType type);
+    virtual bool getParameterAsBool(DLCManager::EDLCParameterType type);
+    std::vector<SKIN_BOX*>* getAdditionalBoxes();
+    int                     getAdditionalBoxesCount();
+    unsigned int getAnimOverrideBitmask() { return m_uiAnimOverrideBitmask; }
+    bool         isFree() { return m_bIsFree; }
+};

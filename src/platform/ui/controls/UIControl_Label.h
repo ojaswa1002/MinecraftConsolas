@@ -1,0 +1,20 @@
+#pragma once
+
+#include <iggy.h>
+
+#include "UIControl_Base.h"
+
+class UIControl_Label : public UIControl_Base {
+public:
+    UIControl_Label();
+
+    virtual bool setupControl(
+        UIScene*           scene,
+        IggyValuePath*     parent,
+        const std::string& controlName
+    );
+
+    void         init(const std::wstring& label);
+    void         init(const std::string& label);
+    virtual void ReInit();
+};

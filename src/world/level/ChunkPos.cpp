@@ -1,0 +1,66 @@
+#include "ChunkPos.h"
+
+#include <string>
+#include <type_traits>
+#include <utility>
+
+#include "util/console/StringHelpers.h"
+#include "world/entity/Entity.h"
+
+#include "TilePos.h"
+
+ChunkPos::ChunkPos(int x, int z) : x(x), z(z) {}
+
+std::int64_t ChunkPos::hashCode(int x, int z) {
+    std::int64_t xx = x;
+    std::int64_t zz = z;
+    return (xx & 0xffffffffl) | ((zz & 0xffffffffl) << 32l);
+}
+
+int ChunkPos::hashCode() {
+    std::int64_t hash = hashCode(x, z);
+    int          h1   = (int)(hash);
+    int          h2   = (int)(hash >> 32l);
+    return h1 ^ h2;
+}
+
+double ChunkPos::distanceToSqr(std::shared_ptr<Entity> e) {
+    double xPos = x * 16 + 8;
+    double zPos = z * 16 + 8;
+
+    double xd = xPos - e->x;
+    double zd = zPos - e->z;
+
+    return xd * xd + zd * zd;
+}
+
+double ChunkPos::distanceToSqr(double px, double pz) {
+    double xPos = x * 16 + 8;
+    double zPos = z * 16 + 8;
+
+    double xd = xPos - px;
+    double zd = zPos - pz;
+
+    return xd * xd + zd * zd;
+}
+
+int ChunkPos::getMiddleBlockX() { return (x << 4) + 8; }
+
+int ChunkPos::getMiddleBlockZ() { return (z << 4) + 8; }
+
+TilePos ChunkPos::getMiddleBlockPosition(int y) {
+    return TilePos(getMiddleBlockX(), y, getMiddleBlockZ());
+}
+
+std::wstring ChunkPos::toString() {
+    return L"[" + _toString<int>(x) + L", " + _toString<int>(z) + L"]";
+}
+
+std::int64_t ChunkPos::hash_fnct(const ChunkPos& k) {
+    return k.hashCode(k.x, k.z);
+}
+
+bool ChunkPos::eq_test(const ChunkPos& x, const ChunkPos& y) {
+    return x.x == y.x && x.z == y.z;
+}
+

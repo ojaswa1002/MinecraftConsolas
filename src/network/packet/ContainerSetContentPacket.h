@@ -1,0 +1,38 @@
+#pragma once
+
+#include <memory>
+#include <vector>
+
+#include "util/console/ArrayWithLength.h"
+
+#include "Packet.h"
+
+class ItemInstance;
+
+class ContainerSetContentPacket
+: public Packet,
+  public std::enable_shared_from_this<ContainerSetContentPacket> {
+public:
+    int               containerId;
+    ItemInstanceArray items;
+
+    ContainerSetContentPacket();
+    ~ContainerSetContentPacket();
+    ContainerSetContentPacket(
+        int                                         containerId,
+        std::vector<std::shared_ptr<ItemInstance>>* newItems
+    );
+
+    virtual void read(DataInputStream* dis);
+    virtual void write(DataOutputStream* dos);
+    virtual void handle(PacketListener* listener);
+    virtual int  getEstimatedSize();
+
+public:
+    static std::shared_ptr<Packet> create() {
+        return std::shared_ptr<Packet>(new ContainerSetContentPacket());
+    }
+    virtual int getId() { return 104; }
+};
+
+

@@ -1,0 +1,35 @@
+#pragma once
+
+#include <memory>
+
+#include "win/extraX64.h"
+
+#include "Packet.h"
+
+class Entity;
+
+class TeleportEntityPacket
+: public Packet,
+  public std::enable_shared_from_this<TeleportEntityPacket> {
+public:
+    int  id;
+    int  x, y, z;
+    byte yRot, xRot;
+
+    TeleportEntityPacket();
+    TeleportEntityPacket(std::shared_ptr<Entity> e);
+    TeleportEntityPacket(int id, int x, int y, int z, byte yRot, byte xRot);
+
+    virtual void read(DataInputStream* dis);
+    virtual void write(DataOutputStream* dos);
+    virtual void handle(PacketListener* listener);
+    virtual int  getEstimatedSize();
+    virtual bool canBeInvalidated();
+    virtual bool isInvalidatedBy(std::shared_ptr<Packet> packet);
+
+public:
+    static std::shared_ptr<Packet> create() {
+        return std::shared_ptr<Packet>(new TeleportEntityPacket());
+    }
+    virtual int getId() { return 34; }
+};

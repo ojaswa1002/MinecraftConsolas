@@ -1,0 +1,22 @@
+#pragma once
+
+#include "MobRenderer.h"
+
+class Model;
+
+class OzelotRenderer : public MobRenderer {
+public:
+    OzelotRenderer(Model* model, float shadow);
+
+    void render(
+        std::shared_ptr<Entity> _mob,
+        double                  x,
+        double                  y,
+        double                  z,
+        float                   rot,
+        float                   a
+    );
+
+protected:
+    void scale(std::shared_ptr<Mob> _mob, float a);
+};

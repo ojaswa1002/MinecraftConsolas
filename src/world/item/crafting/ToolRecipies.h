@@ -1,0 +1,27 @@
+// package net.minecraft.world.item.crafting;
+
+// import net.minecraft.world.item.*;
+// import net.minecraft.world.level.tile.Tile;
+#pragma once
+
+#include <string>
+#include <vector>
+
+#define MAX_TOOL_RECIPES 5
+
+class Object;
+class Recipes;
+
+class ToolRecipies {
+public:
+    // 4J - added for common ctor code
+    void _init();
+    ToolRecipies() { _init(); }
+
+private:
+    static std::wstring   shapes[][4];
+    std::vector<Object*>* map;
+
+public:
+    void addRecipes(Recipes* r);
+};

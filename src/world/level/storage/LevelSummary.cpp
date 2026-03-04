@@ -1,0 +1,51 @@
+#include "LevelSummary.h"
+
+#include <type_traits>
+#include <utility>
+
+LevelSummary::LevelSummary(
+    const std::wstring& levelId,
+    const std::wstring& levelName,
+    std::int64_t        lastPlayed,
+    std::int64_t        sizeOnDisk,
+    GameType*           gameMode,
+    bool                requiresConversion,
+    bool                hardcore,
+    bool                hasCheats
+)
+: levelId(levelId),
+  levelName(levelName),
+  lastPlayed(lastPlayed),
+  sizeOnDisk(sizeOnDisk),
+  gameMode(gameMode),
+  requiresConversion(requiresConversion),
+  hardcore(hardcore),
+  _hasCheats(hasCheats) {}
+
+std::wstring LevelSummary::getLevelId() { return levelId; }
+
+std::wstring LevelSummary::getLevelName() { return levelName; }
+
+std::int64_t LevelSummary::getSizeOnDisk() { return sizeOnDisk; }
+
+bool LevelSummary::isRequiresConversion() { return requiresConversion; }
+
+std::int64_t LevelSummary::getLastPlayed() { return lastPlayed; }
+
+int LevelSummary::compareTo(LevelSummary* rhs) {
+    if (lastPlayed < rhs->lastPlayed) {
+        return 1;
+    }
+    if (lastPlayed > rhs->lastPlayed) {
+        return -1;
+    }
+
+    // TODO 4J Jev, used to be compareTo in java, is this right?
+    return levelId.compare(rhs->levelId);
+}
+
+GameType* LevelSummary::getGameMode() { return gameMode; }
+
+bool LevelSummary::isHardcore() { return hardcore; }
+
+bool LevelSummary::hasCheats() { return _hasCheats; }

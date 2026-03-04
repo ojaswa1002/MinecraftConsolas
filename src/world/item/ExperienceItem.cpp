@@ -1,0 +1,43 @@
+#include "ExperienceItem.h"
+
+#include <memory>
+
+#include "util/java/Random.h"
+#include "world/SoundTypes.h"
+#include "world/entity/player/Abilities.h"
+#include "world/entity/player/Player.h"
+#include "world/entity/projectile/ThrownExpBottle.h"
+#include "world/level/Level.h"
+
+#include "ItemInstance.h"
+
+ExperienceItem::ExperienceItem(int id) : Item(id) {}
+
+bool ExperienceItem::isFoil(std::shared_ptr<ItemInstance> itemInstance) {
+    return true;
+}
+
+bool ExperienceItem::TestUse(Level* level, std::shared_ptr<Player> player) {
+    return true;
+}
+
+std::shared_ptr<ItemInstance> ExperienceItem::use(
+    std::shared_ptr<ItemInstance> itemInstance,
+    Level*                        level,
+    std::shared_ptr<Player>       player
+) {
+    if (!player->abilities.instabuild) {
+        itemInstance->count--;
+    }
+    level->playSound(
+        player,
+        eSoundType_RANDOM_BOW,
+        0.5f,
+        0.4f / (random->nextFloat() * 0.4f + 0.8f)
+    );
+    if (!level->isClientSide)
+        level->addEntity(
+            std::shared_ptr<ThrownExpBottle>(new ThrownExpBottle(level, player))
+        );
+    return itemInstance;
+}

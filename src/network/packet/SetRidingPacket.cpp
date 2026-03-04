@@ -1,0 +1,48 @@
+#include "SetRidingPacket.h"
+
+#include <cstddef>
+
+#include "util/java/InputOutputStream/DataInputStream.h"
+#include "util/java/InputOutputStream/DataOutputStream.h"
+#include "world/entity/Entity.h"
+
+#include "PacketListener.h"
+
+SetRidingPacket::SetRidingPacket() {
+    riderId  = -1;
+    riddenId = -1;
+}
+
+SetRidingPacket::SetRidingPacket(
+    std::shared_ptr<Entity> rider,
+    std::shared_ptr<Entity> riding
+) {
+    this->riderId  = rider->entityId;
+    this->riddenId = riding != NULL ? riding->entityId : -1;
+}
+
+int SetRidingPacket::getEstimatedSize() { return 8; }
+
+void SetRidingPacket::read(DataInputStream* dis) // throws IOException
+{
+    riderId  = dis->readInt();
+    riddenId = dis->readInt();
+}
+
+void SetRidingPacket::write(DataOutputStream* dos) // throws IOException
+{
+    dos->writeInt(riderId);
+    dos->writeInt(riddenId);
+}
+
+void SetRidingPacket::handle(PacketListener* listener) {
+    listener->handleRidePacket(shared_from_this());
+}
+
+bool SetRidingPacket::canBeInvalidated() { return true; }
+
+bool SetRidingPacket::isInvalidatedBy(std::shared_ptr<Packet> packet) {
+    std::shared_ptr<SetRidingPacket> target =
+        dynamic_pointer_cast<SetRidingPacket>(packet);
+    return target->riderId == riderId;
+}

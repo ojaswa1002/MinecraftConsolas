@@ -1,0 +1,22 @@
+#pragma once
+
+#include "EntityRenderer.h"
+
+class Model;
+
+class BoatRenderer : public EntityRenderer {
+protected:
+    Model* model;
+
+public:
+    BoatRenderer();
+
+    virtual void render(
+        std::shared_ptr<Entity> boat,
+        double                  x,
+        double                  y,
+        double                  z,
+        float                   rot,
+        float                   a
+    );
+};

@@ -1,0 +1,46 @@
+#pragma once
+
+#include <cstddef>
+#include <memory>
+#include <vector>
+
+class CompoundTag;
+class DataInputStream;
+class DataOutputStream;
+class ItemInstance;
+class MerchantRecipe;
+
+class MerchantRecipeList {
+private:
+    std::vector<MerchantRecipe*> m_recipes;
+
+public:
+    MerchantRecipeList();
+    MerchantRecipeList(CompoundTag* tag);
+    ~MerchantRecipeList();
+
+    MerchantRecipe* getRecipeFor(
+        std::shared_ptr<ItemInstance> buyA,
+        std::shared_ptr<ItemInstance> buyB,
+        int                           selectionHint
+    );
+    bool addIfNewOrBetter(MerchantRecipe* recipe); // 4J Added bool return
+    MerchantRecipe* getMatchingRecipeFor(
+        std::shared_ptr<ItemInstance> buy,
+        std::shared_ptr<ItemInstance> buyB,
+        std::shared_ptr<ItemInstance> sell
+    );
+    void                       writeToStream(DataOutputStream* stream);
+    static MerchantRecipeList* createFromStream(DataInputStream* stream);
+    void                       load(CompoundTag* tag);
+    CompoundTag*               createTag();
+
+    void                                   push_back(MerchantRecipe* recipe);
+    MerchantRecipe*                        at(size_t index);
+    std::vector<MerchantRecipe*>::iterator begin();
+    std::vector<MerchantRecipe*>::iterator end();
+    std::vector<MerchantRecipe*>::iterator
+           erase(std::vector<MerchantRecipe*>::iterator it);
+    size_t size();
+    bool   empty();
+};

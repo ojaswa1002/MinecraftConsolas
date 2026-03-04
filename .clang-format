@@ -1,0 +1,64 @@
+BasedOnStyle: LLVM
+AccessModifierOffset: -4
+AlignAfterOpenBracket: BlockIndent
+AlignArrayOfStructures: Left
+AlignConsecutiveDeclarations:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+  AlignCompound: true
+  PadOperators: true
+AlignConsecutiveMacros:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: false
+AlignOperands: AlignAfterOperator
+AlignConsecutiveBitFields:
+  Enabled: true
+  AcrossEmptyLines: false
+  AcrossComments: false
+AllowShortLambdasOnASingleLine: All
+AllowShortBlocksOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: AllIfsAndElse
+AllowShortLoopsOnASingleLine: true
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakTemplateDeclarations: "Yes"
+BinPackArguments: false
+BinPackParameters: false
+BreakBeforeBraces: Custom
+BreakBeforeBinaryOperators: NonAssignment
+CommentPragmas: "^ IWYU pragma:"
+ConstructorInitializerIndentWidth: 0
+IndentWidth: 4
+Language: Cpp
+MaxEmptyLinesToKeep: 2
+PackConstructorInitializers: CurrentLine
+PointerAlignment: Left
+TabWidth: 4
+UseTab: Never
+SortIncludes: CaseSensitive
+
+KeepEmptyLines:
+  AtEndOfFile: true
+  AtStartOfBlock: false
+  AtStartOfFile: false
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: "^<(algorithm|deque|functional|iostream|iterator|list|map|memory|ostream|queue|set|sstream|string|unordered_map|unordered_set|utility|vector|type_traits|cmath|cstdint|cstdio|cstdlib|cassert|cctype|cfloat|climits|cstddef|cstdarg|cstring)>$"
+    Priority: 1
+  - Regex: "^<(errno.h|io.h|fcntl.h|malloc.h|alloc.h|sys/sys_time.h|sys/types.h|unistd.h|windows.h|d3d11.h)>$"
+    Priority: 2
+  - Regex: "^<(4J_Input.h|4J_Profile.h|4J_Render.h|4J_Storage.h|gdraw.h|iggy.h|gdraw_d3d11.h|ps3|iggyexpruntime.h|iggyperfmon.h|mss.h|rrcore.h|ATGXmlParser.h|zlib.h|zconf.h)>$"
+    Priority: 3
+  - Regex: "^<.*>$"
+    Priority: 3
+  - Regex: '^"(client|commands|deps|locale|nbt|network|platform|ps3|server|stats|util|win|world|xbox)/'
+    Priority: 4
+  - Regex: '^".*"'
+    Priority: 5

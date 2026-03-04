@@ -1,0 +1,11 @@
+#include "GravelTile.h"
+
+#include "util/java/Random.h"
+#include "world/item/Item.h"
+
+GravelTile::GravelTile(int type) : HeavyTile(type) {}
+
+int GravelTile::getResource(int data, Random* random, int playerBonusLevel) {
+    if (random->nextInt(10 - playerBonusLevel * 3) == 0) return Item::flint->id;
+    return id;
+}

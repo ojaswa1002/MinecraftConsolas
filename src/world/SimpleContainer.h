@@ -1,0 +1,46 @@
+#pragma once
+
+#include <vector>
+
+#include "util/console/ArrayWithLength.h"
+
+#include "Container.h"
+
+namespace net_minecraft_world {
+class ContainerListener;
+} // namespace net_minecraft_world
+
+class SimpleContainer : public Container {
+private:
+    int                                                   name;
+    int                                                   size;
+    ItemInstanceArray*                                    items;
+    std::vector<net_minecraft_world::ContainerListener*>* listeners;
+
+public:
+    SimpleContainer(int name, int size);
+
+    void addListener(net_minecraft_world::ContainerListener* listener);
+
+    void removeListener(net_minecraft_world::ContainerListener* listener);
+
+    std::shared_ptr<ItemInstance> getItem(unsigned int slot);
+
+    std::shared_ptr<ItemInstance> removeItem(unsigned int slot, int count);
+    std::shared_ptr<ItemInstance> removeItemNoUpdate(int slot);
+
+    void setItem(unsigned int slot, std::shared_ptr<ItemInstance> item);
+
+    unsigned int getContainerSize();
+
+    int getName();
+
+    int getMaxStackSize();
+
+    void setChanged();
+
+    bool stillValid(std::shared_ptr<Player> player);
+
+    void startOpen() {} // TODO Auto-generated method stub
+    void stopOpen() {}  // TODO Auto-generated method stub
+};

@@ -1,0 +1,73 @@
+#include "GoldenAppleItem.h"
+
+#include <memory>
+
+#include "util/SharedConstants.h"
+#include "win/strings.h"
+#include "world/effect/MobEffect.h"
+#include "world/effect/MobEffectInstance.h"
+#include "world/entity/player/Player.h"
+#include "world/level/Level.h"
+
+#include "ItemInstance.h"
+#include "Rarity.h"
+
+GoldenAppleItem::GoldenAppleItem(
+    int   id,
+    int   nutrition,
+    float saturationMod,
+    bool  isMeat
+)
+: FoodItem(id, nutrition, saturationMod, isMeat) {
+    setStackedByData(true);
+}
+
+bool GoldenAppleItem::isFoil(std::shared_ptr<ItemInstance> itemInstance) {
+    return itemInstance->getAuxValue() > 0;
+}
+
+const Rarity*
+GoldenAppleItem::getRarity(std::shared_ptr<ItemInstance> itemInstance) {
+    if (itemInstance->getAuxValue() == 0) {
+        return Rarity::rare;
+    }
+    return Rarity::epic;
+}
+
+void GoldenAppleItem::addEatEffect(
+    std::shared_ptr<ItemInstance> instance,
+    Level*                        level,
+    std::shared_ptr<Player>       player
+) {
+    if (instance->getAuxValue() > 0) {
+        if (!level->isClientSide) {
+            player->addEffect(new MobEffectInstance(
+                MobEffect::regeneration->id,
+                30 * SharedConstants::TICKS_PER_SECOND,
+                3
+            ));
+            player->addEffect(new MobEffectInstance(
+                MobEffect::damageResistance->id,
+                300 * SharedConstants::TICKS_PER_SECOND,
+                0
+            ));
+            player->addEffect(new MobEffectInstance(
+                MobEffect::fireResistance->id,
+                300 * SharedConstants::TICKS_PER_SECOND,
+                0
+            ));
+        }
+    } else {
+        FoodItem::addEatEffect(instance, level, player);
+    }
+}
+
+unsigned int GoldenAppleItem::getUseDescriptionId(int iData /*= -1*/) {
+    if (iData == 0) return IDS_DESC_GOLDENAPPLE;
+    else return IDS_DESC_ENCHANTED_GOLDENAPPLE;
+}
+
+unsigned int
+GoldenAppleItem::getUseDescriptionId(std::shared_ptr<ItemInstance> instance) {
+    return this->getUseDescriptionId(instance->getAuxValue());
+}

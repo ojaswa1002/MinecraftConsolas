@@ -1,0 +1,27 @@
+#include "DefendVillageTargetGoal.h"
+
+#include <cstddef>
+
+#include "world/entity/Mob.h"
+#include "world/entity/ai/village/Village.h"
+#include "world/entity/animal/VillagerGolem.h"
+
+DefendVillageTargetGoal::DefendVillageTargetGoal(VillagerGolem* golem)
+: TargetGoal(golem, 16, false, true) {
+    this->golem = golem;
+    setRequiredControlFlags(TargetGoal::TargetFlag);
+}
+
+bool DefendVillageTargetGoal::canUse() {
+    std::shared_ptr<Village> village = golem->getVillage();
+    if (village == NULL) return false;
+    potentialTarget = std::weak_ptr<Mob>(village->getClosestAggressor(
+        dynamic_pointer_cast<Mob>(golem->shared_from_this())
+    ));
+    return canAttack(potentialTarget.lock(), false);
+}
+
+void DefendVillageTargetGoal::start() {
+    golem->setTarget(potentialTarget.lock());
+    TargetGoal::start();
+}

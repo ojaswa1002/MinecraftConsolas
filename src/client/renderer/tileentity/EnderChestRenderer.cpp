@@ -1,0 +1,66 @@
+#include "EnderChestRenderer.h"
+
+#include <memory>
+
+#include "client/model/geom/ModelPart.h"
+#include "client/renderer/Stubs.h"
+#include "client/renderer/Textures.h"
+#include "util/console/Definitions.h"
+#include "world/level/tile/entity/EnderChestTileEntity.h"
+#include "world/level/tile/entity/TileEntity.h"
+
+void EnderChestRenderer::render(
+    std::shared_ptr<TileEntity> _chest,
+    double                      x,
+    double                      y,
+    double                      z,
+    float                       a,
+    bool                        setColor,
+    float                       alpha,
+    bool                        useCompiled
+) {
+    // 4J Convert as we aren't using a templated class
+    std::shared_ptr<EnderChestTileEntity> chest =
+        dynamic_pointer_cast<EnderChestTileEntity>(_chest);
+
+    int data = 0;
+
+    if (chest->hasLevel()) {
+        data = chest->getData();
+    }
+
+    bindTexture(TN_TILE_ENDER_CHEST); //"/item/enderchest.png");
+
+    glPushMatrix();
+    glEnable(GL_RESCALE_NORMAL);
+    // glColor4f(1, 1, 1, 1);
+    if (setColor) glColor4f(1, 1, 1, alpha);
+    glTranslatef((float)x, (float)y + 1, (float)z + 1);
+    glScalef(1, -1, -1);
+
+    glTranslatef(0.5f, 0.5f, 0.5f);
+    int rot = 0;
+    if (data == 2) rot = 180;
+    if (data == 3) rot = 0;
+    if (data == 4) rot = 90;
+    if (data == 5) rot = -90;
+
+    //        if (data == 2) {
+    //            glTranslatef(1, 0, 0);
+    //        }
+    //        if (data == 5) {
+    //            glTranslatef(0, 0, -1);
+    //        }
+    glRotatef(rot, 0, 1, 0);
+    glTranslatef(-0.5f, -0.5f, -0.5f);
+
+    float open = chest->oOpenness + (chest->openness - chest->oOpenness) * a;
+    open       = 1 - open;
+    open       = 1 - open * open * open;
+
+    chestModel.lid->xRot = -(open * PI / 2);
+    chestModel.render(useCompiled);
+    glDisable(GL_RESCALE_NORMAL);
+    glPopMatrix();
+    if (setColor) glColor4f(1, 1, 1, 1);
+}

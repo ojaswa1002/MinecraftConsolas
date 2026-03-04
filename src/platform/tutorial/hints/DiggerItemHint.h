@@ -1,0 +1,26 @@
+#pragma once
+
+#include "platform/tutorial/TutorialEnum.h"
+
+#include "TutorialHint.h"
+
+class Tutorial;
+
+class DiggerItemHint : public TutorialHint {
+private:
+    int*         m_iItems;
+    unsigned int m_iItemsCount;
+
+public:
+    DiggerItemHint(
+        eTutorial_Hint id,
+        Tutorial*      tutorial,
+        int            descriptionId,
+        int            items[],
+        unsigned int   itemsLength
+    );
+    virtual int
+    startDestroyBlock(std::shared_ptr<ItemInstance> item, Tile* tile);
+    virtual int
+    attack(std::shared_ptr<ItemInstance> item, std::shared_ptr<Entity> entity);
+};

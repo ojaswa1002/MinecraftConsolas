@@ -1,0 +1,34 @@
+#include "SetTimePacket.h"
+
+#include "util/java/InputOutputStream/DataInputStream.h"
+#include "util/java/InputOutputStream/DataOutputStream.h"
+
+#include "PacketListener.h"
+
+SetTimePacket::SetTimePacket() { time = 0; }
+
+SetTimePacket::SetTimePacket(std::int64_t time) { this->time = time; }
+
+void SetTimePacket::read(DataInputStream* dis) // throws IOException
+{
+    time = dis->readLong();
+}
+
+void SetTimePacket::write(DataOutputStream* dos) // throws IOException
+{
+    dos->writeLong(time);
+}
+
+void SetTimePacket::handle(PacketListener* listener) {
+    listener->handleSetTime(shared_from_this());
+}
+
+int SetTimePacket::getEstimatedSize() { return 8; }
+
+bool SetTimePacket::canBeInvalidated() { return true; }
+
+bool SetTimePacket::isInvalidatedBy(std::shared_ptr<Packet> packet) {
+    return true;
+}
+
+bool SetTimePacket::isAync() { return true; }

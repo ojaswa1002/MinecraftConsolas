@@ -1,0 +1,59 @@
+#pragma once
+
+#include <memory>
+
+#include "util/console/ArrayWithLength.h"
+#include "util/java/Class.h"
+#include "world/Container.h"
+
+#include "TileEntity.h"
+
+class ItemInstance;
+
+class BrewingStandTileEntity : public TileEntity, public Container {
+public:
+    eINSTANCEOF        GetType() { return eTYPE_BREWINGSTANDTILEENTITY; }
+    static TileEntity* create() { return new BrewingStandTileEntity(); }
+
+private:
+    ItemInstanceArray items;
+    static const int  INGREDIENT_SLOT = 3;
+
+    int brewTime;
+    int lastPotionCount;
+    int ingredientId;
+
+public:
+    BrewingStandTileEntity();
+    ~BrewingStandTileEntity();
+    virtual int          getName();
+    virtual unsigned int getContainerSize();
+    virtual void         tick();
+
+    int getBrewTime();
+
+private:
+    bool isBrewable();
+    void doBrew();
+
+    int
+    applyIngredient(int currentBrew, std::shared_ptr<ItemInstance> ingredient);
+
+public:
+    virtual void                          load(CompoundTag* base);
+    virtual void                          save(CompoundTag* base);
+    virtual std::shared_ptr<ItemInstance> getItem(unsigned int slot);
+    virtual std::shared_ptr<ItemInstance> removeItem(unsigned int slot, int i);
+    virtual std::shared_ptr<ItemInstance> removeItemNoUpdate(int slot);
+    virtual void setItem(unsigned int slot, std::shared_ptr<ItemInstance> item);
+    virtual int  getMaxStackSize();
+    virtual bool stillValid(std::shared_ptr<Player> player);
+    virtual void startOpen();
+    virtual void stopOpen();
+    virtual void setBrewTime(int value);
+    virtual void setChanged() {} // 4J added
+    int          getPotionBits();
+
+    // 4J Added
+    virtual std::shared_ptr<TileEntity> clone();
+};

@@ -1,0 +1,48 @@
+#pragma once
+
+#include <memory>
+
+#include "Packet.h"
+
+class GameType;
+class LevelType;
+
+class RespawnPacket : public Packet,
+                      public std::enable_shared_from_this<RespawnPacket> {
+public:
+    char         dimension;
+    char         difficulty;
+    std::int64_t mapSeed;
+    int          mapHeight;
+    GameType*    playerGameType;
+    bool         m_newSeaLevel; // 4J added
+    LevelType*   m_pLevelType;
+    int          m_newEntityId;
+    int          m_xzSize;    // 4J Added
+    int          m_hellScale; // 4J Added
+
+    RespawnPacket();
+    RespawnPacket(
+        char         dimension,
+        std::int64_t mapSeed,
+        int          mapHeight,
+        GameType*    playerGameType,
+        char         difficulty,
+        LevelType*   pLevelType,
+        bool         newSeaLevel,
+        int          newEntityId,
+        int          xzSize,
+        int          hellScale
+    );
+
+    virtual void handle(PacketListener* listener);
+    virtual void read(DataInputStream* dis);
+    virtual void write(DataOutputStream* dos);
+    virtual int  getEstimatedSize();
+
+public:
+    static std::shared_ptr<Packet> create() {
+        return std::shared_ptr<Packet>(new RespawnPacket());
+    }
+    virtual int getId() { return 9; }
+};

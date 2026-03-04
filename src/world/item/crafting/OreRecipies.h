@@ -1,0 +1,21 @@
+#pragma once
+
+#include <vector>
+
+#define MAX_ORE_RECIPES 5
+
+class Object;
+class Recipes;
+
+class OreRecipies {
+public:
+    // 4J - added for common ctor code
+    void _init();
+    OreRecipies() { _init(); }
+
+private:
+    std::vector<Object*>* map;
+
+public:
+    void addRecipes(Recipes* r);
+};
