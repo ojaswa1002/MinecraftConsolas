@@ -185,7 +185,7 @@ bool MonsterPlacerItem::useOn(
         level->setTile(x, y, z, 0);
         level->setTile(x, y, z, Tile::mobSpawner_Id);
         std::shared_ptr<MobSpawnerTileEntity> mste =
-            dynamic_pointer_cast<MobSpawnerTileEntity>(
+            std::dynamic_pointer_cast<MobSpawnerTileEntity>(
                 level->getTileEntity(x, y, z)
             );
         if (mste != NULL) {
@@ -280,7 +280,7 @@ std::shared_ptr<Entity> MonsterPlacerItem::spawnMobAt(
     for (int i = 0; i < SPAWN_COUNT; i++) {
         newEntity = canSpawn(mobId, level, piResult);
 
-        std::shared_ptr<Mob> mob = dynamic_pointer_cast<Mob>(newEntity);
+        std::shared_ptr<Mob> mob = std::dynamic_pointer_cast<Mob>(newEntity);
         if (mob) {
             newEntity->moveTo(
                 x,

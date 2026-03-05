@@ -28,7 +28,9 @@ FurnaceMenu::FurnaceMenu(
     addSlot(new Slot(furnace, 0, 52 + 4, 13 + 4));
     addSlot(new Slot(furnace, 1, 52 + 4, 49 + 4));
     addSlot(new FurnaceResultSlot(
-        dynamic_pointer_cast<Player>(inventory->player->shared_from_this()),
+        std::dynamic_pointer_cast<Player>(
+            inventory->player->shared_from_this()
+        ),
         furnace,
         2,
         112 + 4,

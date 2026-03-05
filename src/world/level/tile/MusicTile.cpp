@@ -17,7 +17,9 @@ void MusicTile::neighborChanged(Level* level, int x, int y, int z, int type) {
     app.DebugPrintf("-------- Neighbour changed type %d\n", type);
     bool                             signal = level->hasNeighborSignal(x, y, z);
     std::shared_ptr<MusicTileEntity> mte =
-        dynamic_pointer_cast<MusicTileEntity>(level->getTileEntity(x, y, z));
+        std::dynamic_pointer_cast<MusicTileEntity>(
+            level->getTileEntity(x, y, z)
+        );
     app.DebugPrintf(
         "-------- Signal is %s, tile is currently %s\n",
         signal ? "TRUE" : "FALSE",
@@ -49,7 +51,9 @@ bool MusicTile::
     if (soundOnly) return false;
     if (level->isClientSide) return true;
     std::shared_ptr<MusicTileEntity> mte =
-        dynamic_pointer_cast<MusicTileEntity>(level->getTileEntity(x, y, z));
+        std::dynamic_pointer_cast<MusicTileEntity>(
+            level->getTileEntity(x, y, z)
+        );
     if (mte != NULL) {
         mte->tune();
         mte->playNote(level, x, y, z);
@@ -66,7 +70,9 @@ void MusicTile::attack(
 ) {
     if (level->isClientSide) return;
     std::shared_ptr<MusicTileEntity> mte =
-        dynamic_pointer_cast<MusicTileEntity>(level->getTileEntity(x, y, z));
+        std::dynamic_pointer_cast<MusicTileEntity>(
+            level->getTileEntity(x, y, z)
+        );
     if (mte != NULL) mte->playNote(level, x, y, z);
 }
 

@@ -110,7 +110,7 @@ void WolfModel::prepareMobModel(
     float                r,
     float                a
 ) {
-    std::shared_ptr<Wolf> wolf = dynamic_pointer_cast<Wolf>(mob);
+    std::shared_ptr<Wolf> wolf = std::dynamic_pointer_cast<Wolf>(mob);
 
     if (wolf->isAngry()) {
         tail->yRot = 0;

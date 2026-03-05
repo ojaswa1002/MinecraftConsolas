@@ -76,7 +76,7 @@ bool EnderCrystal::hurt(DamageSource* source, int damage) {
     // 4J-PB - if the owner of the source is the enderdragon, then ignore it
     // (where the dragon's fireball hits an endercrystal)
     std::shared_ptr<EnderDragon> sourceIsDragon =
-        dynamic_pointer_cast<EnderDragon>(source->getEntity());
+        std::dynamic_pointer_cast<EnderDragon>(source->getEntity());
 
     if (sourceIsDragon != NULL) {
         return false;
@@ -95,7 +95,7 @@ bool EnderCrystal::hurt(DamageSource* source, int damage) {
                 auto                         itEnd  = entities.end();
                 for (auto it = entities.begin(); it != itEnd; it++) {
                     std::shared_ptr<Entity> e = *it; // entities->at(i);
-                    dragon = dynamic_pointer_cast<EnderDragon>(e);
+                    dragon = std::dynamic_pointer_cast<EnderDragon>(e);
                     if (dragon != NULL) {
                         dragon->handleCrystalDestroyed(source);
                         break;

@@ -69,7 +69,7 @@ int Pig::getMaxHealth() { return 10; }
 
 bool Pig::canBeControlledByRider() {
     std::shared_ptr<ItemInstance> item =
-        dynamic_pointer_cast<Player>(rider.lock())->getCarriedItem();
+        std::dynamic_pointer_cast<Player>(rider.lock())->getCarriedItem();
 
     return item != NULL && item->id == Item::carrotOnAStick_Id;
 }
@@ -148,8 +148,9 @@ void Pig::thunderHit(const LightningBolt* lightningBolt) {
 
 void Pig::causeFallDamage(float distance) {
     Animal::causeFallDamage(distance);
-    if (distance > 5 && dynamic_pointer_cast<Player>(rider.lock()) != NULL) {
-        (dynamic_pointer_cast<Player>(rider.lock()))
+    if (distance > 5
+        && std::dynamic_pointer_cast<Player>(rider.lock()) != NULL) {
+        (std::dynamic_pointer_cast<Player>(rider.lock()))
             ->awardStat(GenericStats::flyPig(), GenericStats::param_flyPig());
     }
 }

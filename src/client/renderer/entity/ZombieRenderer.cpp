@@ -44,7 +44,7 @@ int ZombieRenderer::prepareArmor(
     int                  layer,
     float                a
 ) {
-    std::shared_ptr<Zombie> mob = dynamic_pointer_cast<Zombie>(_mob);
+    std::shared_ptr<Zombie> mob = std::dynamic_pointer_cast<Zombie>(_mob);
     swapArmor(mob);
     return HumanoidMobRenderer::prepareArmor(_mob, layer, a);
 }
@@ -57,13 +57,13 @@ void ZombieRenderer::render(
     float                   rot,
     float                   a
 ) {
-    std::shared_ptr<Zombie> mob = dynamic_pointer_cast<Zombie>(_mob);
+    std::shared_ptr<Zombie> mob = std::dynamic_pointer_cast<Zombie>(_mob);
     swapArmor(mob);
     HumanoidMobRenderer::render(_mob, x, y, z, rot, a);
 }
 
 void ZombieRenderer::additionalRendering(std::shared_ptr<Mob> _mob, float a) {
-    std::shared_ptr<Zombie> mob = dynamic_pointer_cast<Zombie>(_mob);
+    std::shared_ptr<Zombie> mob = std::dynamic_pointer_cast<Zombie>(_mob);
     swapArmor(mob);
     HumanoidMobRenderer::additionalRendering(_mob, a);
 }
@@ -95,7 +95,7 @@ void ZombieRenderer::setupRotations(
     float                bodyRot,
     float                a
 ) {
-    std::shared_ptr<Zombie> mob = dynamic_pointer_cast<Zombie>(_mob);
+    std::shared_ptr<Zombie> mob = std::dynamic_pointer_cast<Zombie>(_mob);
     if (mob->isConverting()) {
         bodyRot += (float)(cos(mob->tickCount * 3.25) * PI * .25f);
     }

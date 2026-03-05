@@ -21,7 +21,9 @@ MerchantMenu::MerchantMenu(
     this->level = level;
 
     tradeContainer = std::shared_ptr<MerchantContainer>(new MerchantContainer(
-        dynamic_pointer_cast<Player>(inventory->player->shared_from_this()),
+        std::dynamic_pointer_cast<Player>(
+            inventory->player->shared_from_this()
+        ),
         merchant
     ));
     addSlot(new Slot(tradeContainer, PAYMENT1_SLOT, SELLSLOT1_X, ROW2_Y));

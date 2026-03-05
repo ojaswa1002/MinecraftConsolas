@@ -54,7 +54,7 @@ Ghast::Ghast(Level* level) : FlyingMob(level) {
 bool Ghast::hurt(DamageSource* source, int dmg) {
     if (source->getMsgId() == ChatPacket::e_ChatDeathFireball) {
         std::shared_ptr<Player> player =
-            dynamic_pointer_cast<Player>(source->getEntity());
+            std::dynamic_pointer_cast<Player>(source->getEntity());
         if (player != NULL) {
             // reflected fireball, kill the ghast
             FlyingMob::hurt(source, 1000);
@@ -162,7 +162,7 @@ void Ghast::serverAiStep() {
                 std::shared_ptr<Fireball> ie =
                     std::shared_ptr<Fireball>(new Fireball(
                         level,
-                        dynamic_pointer_cast<Mob>(shared_from_this()),
+                        std::dynamic_pointer_cast<Mob>(shared_from_this()),
                         xdd,
                         ydd,
                         zdd

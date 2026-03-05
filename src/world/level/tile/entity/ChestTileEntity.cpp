@@ -147,22 +147,22 @@ void ChestTileEntity::checkNeighbors() {
     s                   = std::weak_ptr<ChestTileEntity>();
 
     if (level->getTile(x - 1, y, z) == Tile::chest_Id) {
-        w = dynamic_pointer_cast<ChestTileEntity>(
+        w = std::dynamic_pointer_cast<ChestTileEntity>(
             level->getTileEntity(x - 1, y, z)
         );
     }
     if (level->getTile(x + 1, y, z) == Tile::chest_Id) {
-        e = dynamic_pointer_cast<ChestTileEntity>(
+        e = std::dynamic_pointer_cast<ChestTileEntity>(
             level->getTileEntity(x + 1, y, z)
         );
     }
     if (level->getTile(x, y, z - 1) == Tile::chest_Id) {
-        n = dynamic_pointer_cast<ChestTileEntity>(
+        n = std::dynamic_pointer_cast<ChestTileEntity>(
             level->getTileEntity(x, y, z - 1)
         );
     }
     if (level->getTile(x, y, z + 1) == Tile::chest_Id) {
-        s = dynamic_pointer_cast<ChestTileEntity>(
+        s = std::dynamic_pointer_cast<ChestTileEntity>(
             level->getTileEntity(x, y, z + 1)
         );
     }

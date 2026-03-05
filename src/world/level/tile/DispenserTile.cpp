@@ -123,7 +123,7 @@ bool DispenserTile::
     }
 
     std::shared_ptr<DispenserTileEntity> trap =
-        dynamic_pointer_cast<DispenserTileEntity>(
+        std::dynamic_pointer_cast<DispenserTileEntity>(
             level->getTileEntity(x, y, z)
         );
     player->openTrap(trap);
@@ -155,7 +155,7 @@ void DispenserTile::fireArrow(
     }
 
     std::shared_ptr<DispenserTileEntity> trap =
-        dynamic_pointer_cast<DispenserTileEntity>(
+        std::dynamic_pointer_cast<DispenserTileEntity>(
             level->getTileEntity(x, y, z)
         );
     if (trap != NULL) {
@@ -253,7 +253,7 @@ void DispenserTile::onRemove(
     int    data
 ) {
     std::shared_ptr<Container> container =
-        dynamic_pointer_cast<DispenserTileEntity>(
+        std::dynamic_pointer_cast<DispenserTileEntity>(
             level->getTileEntity(x, y, z)
         );
     if (container != NULL) {
@@ -514,7 +514,7 @@ int DispenserTile::dispenseItem(
         std::shared_ptr<Entity> newEntity =
             MonsterPlacerItem::canSpawn(item->getAuxValue(), level, &iResult);
 
-        std::shared_ptr<Mob> mob = dynamic_pointer_cast<Mob>(newEntity);
+        std::shared_ptr<Mob> mob = std::dynamic_pointer_cast<Mob>(newEntity);
         if (mob != NULL) {
             // 4J-PB - Changed the line below slightly since mobs were sticking
             // to the dispenser rather than dropping down when fired

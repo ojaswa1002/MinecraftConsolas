@@ -37,7 +37,7 @@ EntityDamageSource::getDeathMessagePacket(std::shared_ptr<Player> player) {
     std::wstring additional = L"";
     if (entity->GetType() == eTYPE_SERVERPLAYER) {
         std::shared_ptr<Player> sourcePlayer =
-            dynamic_pointer_cast<Player>(entity);
+            std::dynamic_pointer_cast<Player>(entity);
         if (sourcePlayer != NULL) additional = sourcePlayer->name;
     }
     return std::shared_ptr<ChatPacket>(
@@ -46,6 +46,6 @@ EntityDamageSource::getDeathMessagePacket(std::shared_ptr<Player> player) {
 }
 
 bool EntityDamageSource::scalesWithDifficulty() {
-    return entity != NULL && dynamic_pointer_cast<Mob>(entity)
-        && !(dynamic_pointer_cast<Player>(entity));
+    return entity != NULL && std::dynamic_pointer_cast<Mob>(entity)
+        && !(std::dynamic_pointer_cast<Player>(entity));
 }

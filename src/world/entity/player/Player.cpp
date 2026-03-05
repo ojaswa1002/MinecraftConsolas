@@ -233,7 +233,7 @@ void Player::releaseUsingItem() {
     if (useItem != NULL) {
         useItem->releaseUsing(
             level,
-            dynamic_pointer_cast<Player>(shared_from_this()),
+            std::dynamic_pointer_cast<Player>(shared_from_this()),
             useItemDuration
         );
 
@@ -317,7 +317,7 @@ void Player::tick() {
     if (!level->isClientSide) {
         if (containerMenu != NULL
             && !containerMenu->stillValid(
-                dynamic_pointer_cast<Player>(shared_from_this())
+                std::dynamic_pointer_cast<Player>(shared_from_this())
             )) {
             closeContainer();
             containerMenu = inventoryMenu;
@@ -356,7 +356,7 @@ void Player::tick() {
     }
 
     if (!level->isClientSide) {
-        foodData.tick(dynamic_pointer_cast<Player>(shared_from_this()));
+        foodData.tick(std::dynamic_pointer_cast<Player>(shared_from_this()));
     }
 
     // 4J Stu Debugging
@@ -404,34 +404,34 @@ void Player::tick() {
 
 
             // std::shared_ptr<Mob> mob =
-            // dynamic_pointer_cast<Mob>(Pig::_class->newInstance( level ));
-            // mob->moveTo(x+1, y, z+1, level->random->nextFloat() * 360, 0);
-            // level->addEntity(mob);
+            // std::dynamic_pointer_cast<Mob>(Pig::_class->newInstance( level
+            // )); mob->moveTo(x+1, y, z+1, level->random->nextFloat() * 360,
+            // 0); level->addEntity(mob);
 
             // 4J : WESTY : Spawn some wolves to befriend!
             /*
             std::shared_ptr<Mob> mob1 =
-            dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
+            std::dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
             mob1->moveTo(x+1, y, z+1, level->random->nextFloat() * 360, 0);
             level->addEntity(mob1);
 
             std::shared_ptr<Mob> mob2 =
-            dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
+            std::dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
             mob2->moveTo(x+2, y, z+1, level->random->nextFloat() * 360, 0);
             level->addEntity(mob2);
 
             std::shared_ptr<Mob> mob3 =
-            dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
+            std::dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
             mob3->moveTo(x+1, y, z+2, level->random->nextFloat() * 360, 0);
             level->addEntity(mob3);
 
             std::shared_ptr<Mob> mob4 =
-            dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
+            std::dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
             mob4->moveTo(x+3, y, z+1, level->random->nextFloat() * 360, 0);
             level->addEntity(mob4);
 
             std::shared_ptr<Mob> mob5 =
-            dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
+            std::dynamic_pointer_cast<Mob>(Wolf::_class->newInstance( level ));
             mob5->moveTo(x+1, y, z+3, level->random->nextFloat() * 360, 0);
             level->addEntity(mob5);
             */
@@ -583,7 +583,7 @@ void Player::completeUsingItem() {
         int                           oldCount     = useItem->count;
         std::shared_ptr<ItemInstance> itemInstance = useItem->useTimeDepleted(
             level,
-            dynamic_pointer_cast<Player>(shared_from_this())
+            std::dynamic_pointer_cast<Player>(shared_from_this())
         );
         if (itemInstance != useItem
             || (itemInstance != NULL && itemInstance->count != oldCount)) {
@@ -930,7 +930,7 @@ void Player::rideTick() {
         // xRot = preXRot;
         // yRot = preYRot;
 
-        std::shared_ptr<Pig> pig = dynamic_pointer_cast<Pig>(riding);
+        std::shared_ptr<Pig> pig = std::dynamic_pointer_cast<Pig>(riding);
         yBodyRot                 = pig->yBodyRot;
 
         while (yBodyRot - yBodyRotO < -180) yBodyRotO -= 360;
@@ -1027,7 +1027,7 @@ void Player::aiStep() {
 
 
 void Player::touch(std::shared_ptr<Entity> entity) {
-    entity->playerTouch(dynamic_pointer_cast<Player>(shared_from_this()));
+    entity->playerTouch(std::dynamic_pointer_cast<Player>(shared_from_this()));
 }
 
 // 4J - Removed 1.0.1
@@ -1287,14 +1287,17 @@ bool Player::hurt(DamageSource* source, int dmg) {
     if (dmg == 0) return false;
 
     std::shared_ptr<Entity> attacker = source->getEntity();
-    if (dynamic_pointer_cast<Arrow>(attacker) != NULL) {
-        if ((dynamic_pointer_cast<Arrow>(attacker))->owner != NULL) {
-            attacker = (dynamic_pointer_cast<Arrow>(attacker))->owner;
+    if (std::dynamic_pointer_cast<Arrow>(attacker) != NULL) {
+        if ((std::dynamic_pointer_cast<Arrow>(attacker))->owner != NULL) {
+            attacker = (std::dynamic_pointer_cast<Arrow>(attacker))->owner;
         }
     }
-    if (dynamic_pointer_cast<Mob>(attacker) != NULL) {
+    if (std::dynamic_pointer_cast<Mob>(attacker) != NULL) {
         // aggreviate all pet wolves nearby
-        directAllTameWolvesOnTarget(dynamic_pointer_cast<Mob>(attacker), false);
+        directAllTameWolvesOnTarget(
+            std::dynamic_pointer_cast<Mob>(attacker),
+            false
+        );
     }
 
     return this->Mob::hurt(source, dmg);
@@ -1328,19 +1331,20 @@ void Player::directAllTameWolvesOnTarget(
     bool                 skipSitting
 ) {
     // filter un-attackable mobs
-    if ((dynamic_pointer_cast<Creeper>(target) != NULL)
-        || (dynamic_pointer_cast<Ghast>(target) != NULL)) {
+    if ((std::dynamic_pointer_cast<Creeper>(target) != NULL)
+        || (std::dynamic_pointer_cast<Ghast>(target) != NULL)) {
         return;
     }
     // never target wolves that has this player as owner
-    if (dynamic_pointer_cast<Wolf>(target) != NULL) {
-        std::shared_ptr<Wolf> wolfTarget = dynamic_pointer_cast<Wolf>(target);
+    if (std::dynamic_pointer_cast<Wolf>(target) != NULL) {
+        std::shared_ptr<Wolf> wolfTarget =
+            std::dynamic_pointer_cast<Wolf>(target);
         if (wolfTarget->isTame()
             && m_UUID.compare(wolfTarget->getOwnerUUID()) == 0) {
             return;
         }
     }
-    if ((dynamic_pointer_cast<Player>(target) != NULL)
+    if ((std::dynamic_pointer_cast<Player>(target) != NULL)
         && !isPlayerVersusPlayer()) {
         // pvp is off
         return;
@@ -1355,7 +1359,7 @@ void Player::directAllTameWolvesOnTarget(
         );
     auto itEnd = nearbyWolves->end();
     for (auto it = nearbyWolves->begin(); it != itEnd; it++) {
-        std::shared_ptr<Wolf> wolf = dynamic_pointer_cast<Wolf>(*it);
+        std::shared_ptr<Wolf> wolf = std::dynamic_pointer_cast<Wolf>(*it);
         ;
         if (wolf->isTame() && wolf->getAttackTarget() == NULL
             && m_UUID.compare(wolf->getOwnerUUID()) == 0) {
@@ -1422,15 +1426,15 @@ bool Player::openTrading(std::shared_ptr<Merchant> traderTarget) {
 void Player::openItemInstanceGui(std::shared_ptr<ItemInstance> itemInstance) {}
 
 bool Player::interact(std::shared_ptr<Entity> entity) {
-    if (entity->interact(dynamic_pointer_cast<Player>(shared_from_this())))
+    if (entity->interact(std::dynamic_pointer_cast<Player>(shared_from_this())))
         return true;
     std::shared_ptr<ItemInstance> item = getSelectedItem();
-    if (item != NULL && dynamic_pointer_cast<Mob>(entity) != NULL) {
+    if (item != NULL && std::dynamic_pointer_cast<Mob>(entity) != NULL) {
         // 4J - PC Comments
         // Hack to prevent item stacks from decrementing if the player has
         // the ability to instabuild
         if (this->abilities.instabuild) item = item->copy();
-        if (item->interactEnemy(dynamic_pointer_cast<Mob>(entity))) {
+        if (item->interactEnemy(std::dynamic_pointer_cast<Mob>(entity))) {
             // 4J - PC Comments
             // Don't remove the item in hand if the player has the ability
             // to
@@ -1478,7 +1482,7 @@ void Player::attack(std::shared_ptr<Entity> entity) {
 
     int                  knockback  = 0;
     int                  magicBoost = 0;
-    std::shared_ptr<Mob> mob        = dynamic_pointer_cast<Mob>(entity);
+    std::shared_ptr<Mob> mob        = std::dynamic_pointer_cast<Mob>(entity);
     if (mob != NULL) {
         magicBoost  = EnchantmentHelper::getDamageBonus(inventory, mob);
         knockback  += EnchantmentHelper::getKnockbackBonus(inventory, mob);
@@ -1500,16 +1504,16 @@ void Player::attack(std::shared_ptr<Entity> entity) {
         // fire-enchanted weapon
         bool setOnFireTemporatily = false;
         int  fireAspect           = EnchantmentHelper::getFireAspect(
-            dynamic_pointer_cast<Mob>(shared_from_this())
+            std::dynamic_pointer_cast<Mob>(shared_from_this())
         );
-        if (dynamic_pointer_cast<Mob>(entity) && fireAspect > 0
+        if (std::dynamic_pointer_cast<Mob>(entity) && fireAspect > 0
             && !entity->isOnFire()) {
             setOnFireTemporatily = true;
             entity->setOnFire(1);
         }
 
         DamageSource* damageSource = DamageSource::playerAttack(
-            dynamic_pointer_cast<Player>(shared_from_this())
+            std::dynamic_pointer_cast<Player>(shared_from_this())
         );
         bool wasHurt = entity->hurt(damageSource, dmg);
         delete damageSource;
@@ -1540,7 +1544,7 @@ void Player::attack(std::shared_ptr<Entity> entity) {
             }
             setLastHurtMob(entity);
 
-            std::shared_ptr<Mob> mob = dynamic_pointer_cast<Mob>(entity);
+            std::shared_ptr<Mob> mob = std::dynamic_pointer_cast<Mob>(entity);
             if (mob) {
                 ThornsEnchantment::doThornsAfterAttack(
                     shared_from_this(),
@@ -1551,19 +1555,19 @@ void Player::attack(std::shared_ptr<Entity> entity) {
         }
 
         std::shared_ptr<ItemInstance> item = getSelectedItem();
-        if (item != NULL && dynamic_pointer_cast<Mob>(entity) != NULL) {
+        if (item != NULL && std::dynamic_pointer_cast<Mob>(entity) != NULL) {
             item->hurtEnemy(
-                dynamic_pointer_cast<Mob>(entity),
-                dynamic_pointer_cast<Player>(shared_from_this())
+                std::dynamic_pointer_cast<Mob>(entity),
+                std::dynamic_pointer_cast<Player>(shared_from_this())
             );
             if (item->count <= 0) {
                 removeSelectedItem();
             }
         }
-        if (dynamic_pointer_cast<Mob>(entity) != NULL) {
+        if (std::dynamic_pointer_cast<Mob>(entity) != NULL) {
             if (entity->isAlive()) {
                 directAllTameWolvesOnTarget(
-                    dynamic_pointer_cast<Mob>(entity),
+                    std::dynamic_pointer_cast<Mob>(entity),
                     true
                 );
             }
@@ -1609,10 +1613,12 @@ Slot* Player::getInventorySlot(int slotId) { return NULL; }
 
 void Player::remove() {
     this->Mob::remove();
-    inventoryMenu->removed(dynamic_pointer_cast<Player>(shared_from_this()));
+    inventoryMenu->removed(
+        std::dynamic_pointer_cast<Player>(shared_from_this())
+    );
     if (containerMenu != NULL) {
         containerMenu->removed(
-            dynamic_pointer_cast<Player>(shared_from_this())
+            std::dynamic_pointer_cast<Player>(shared_from_this())
         );
     }
 }
@@ -2005,7 +2011,7 @@ void Player::checkRidingStatistiscs(double dx, double dy, double dz) {
         int distance =
             (int)Math::round(sqrt(dx * dx + dy * dy + dz * dz) * 100.0f);
         if (distance > 0) {
-            if (dynamic_pointer_cast<Minecart>(riding)) {
+            if (std::dynamic_pointer_cast<Minecart>(riding)) {
                 distanceMinecart += distance;
                 if (distanceMinecart >= 100) {
                     int newDistance =
@@ -2062,7 +2068,7 @@ void Player::checkRidingStatistiscs(double dx, double dy, double dz) {
 #endif
                 }
 
-            } else if (dynamic_pointer_cast<Boat>(riding) != NULL) {
+            } else if (std::dynamic_pointer_cast<Boat>(riding) != NULL) {
                 distanceBoat += distance;
                 if (distanceBoat >= 100) {
                     int newDistance  = distanceBoat - (distanceBoat % 100);
@@ -2072,7 +2078,7 @@ void Player::checkRidingStatistiscs(double dx, double dy, double dz) {
                         GenericStats::param_boat(newDistance / 100)
                     );
                 }
-            } else if (dynamic_pointer_cast<Pig>(riding) != NULL) {
+            } else if (std::dynamic_pointer_cast<Pig>(riding) != NULL) {
                 distancePig += distance;
                 if (distancePig >= 100) {
                     int newDistance  = distancePig - (distancePig % 100);
@@ -2110,7 +2116,7 @@ void Player::killed(std::shared_ptr<Mob> mob) {
     // 4J-PB - added the lavaslime enemy - fix for #64007 - TU7: Code:
     // Achievements: TCR#073: Killing Magma Cubes doesn't unlock "Monster
     // Hunter" Achievement.
-    if (dynamic_pointer_cast<Monster>(mob) != NULL
+    if (std::dynamic_pointer_cast<Monster>(mob) != NULL
         || mob->GetType() == eTYPE_GHAST || mob->GetType() == eTYPE_SLIME
         || mob->GetType() == eTYPE_LAVASLIME
         || mob->GetType() == eTYPE_ENDERDRAGON) {
@@ -2307,7 +2313,7 @@ void Player::startUsingItem(
     awardStat(
         GenericStats::itemsUsed(instance->getItem()->id),
         GenericStats::param_itemsUsed(
-            dynamic_pointer_cast<Player>(shared_from_this()),
+            std::dynamic_pointer_cast<Player>(shared_from_this()),
             instance
         )
     );
@@ -2685,7 +2691,7 @@ bool Player::isAllowedToInteract(std::shared_ptr<Entity> target) {
                 )
                 == 0) {
                 std::shared_ptr<Minecart> minecart =
-                    dynamic_pointer_cast<Minecart>(target);
+                    std::dynamic_pointer_cast<Minecart>(target);
                 if (minecart->type == Minecart::CHEST) allowed = false;
             }
 

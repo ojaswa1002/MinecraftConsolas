@@ -199,7 +199,7 @@ void OzelotModel::prepareMobModel(
     float                r,
     float                a
 ) {
-    std::shared_ptr<Ozelot> ozelot = dynamic_pointer_cast<Ozelot>(mob);
+    std::shared_ptr<Ozelot> ozelot = std::dynamic_pointer_cast<Ozelot>(mob);
 
     body->y      = bodyWalkY;
     body->z      = bodyWalkZ;

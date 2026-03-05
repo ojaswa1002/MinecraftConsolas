@@ -37,7 +37,7 @@ void SkullTileRenderer::render(
     bool                        useCompiled
 ) {
     std::shared_ptr<SkullTileEntity> skull =
-        dynamic_pointer_cast<SkullTileEntity>(_skull);
+        std::dynamic_pointer_cast<SkullTileEntity>(_skull);
     renderSkull(
         (float)x,
         (float)y,

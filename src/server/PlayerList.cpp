@@ -1346,7 +1346,7 @@ void PlayerList::broadcast(
     // need to go to that machine either
     std::vector<std::shared_ptr<ServerPlayer>> sentTo;
     if (except != NULL) {
-        sentTo.push_back(dynamic_pointer_cast<ServerPlayer>(except));
+        sentTo.push_back(std::dynamic_pointer_cast<ServerPlayer>(except));
     }
 
     for (unsigned int i = 0; i < players.size(); i++) {
@@ -1382,7 +1382,7 @@ void PlayerList::broadcast(
         double zd = z - p->z;
         if (xd * xd + yd * yd + zd * zd < range * range) {
 #if 0 // _DEBUG
-			std::shared_ptr<LevelSoundPacket> SoundPacket= dynamic_pointer_cast<LevelSoundPacket>(packet);
+			std::shared_ptr<LevelSoundPacket> SoundPacket= std::dynamic_pointer_cast<LevelSoundPacket>(packet);
 
 			if(SoundPacket)
 			{

@@ -200,7 +200,7 @@ std::shared_ptr<Mob> Mob::getLastHurtByMob() { return lastHurtByMob; }
 std::shared_ptr<Mob> Mob::getLastHurtMob() { return lastHurtMob; }
 
 void Mob::setLastHurtMob(std::shared_ptr<Entity> target) {
-    std::shared_ptr<Mob> mob = dynamic_pointer_cast<Mob>(target);
+    std::shared_ptr<Mob> mob = std::dynamic_pointer_cast<Mob>(target);
     if (mob != NULL) lastHurtMob = mob;
 }
 
@@ -588,7 +588,7 @@ bool Mob::hurt(DamageSource* source, int dmg) {
         // 4J-JEV, for new achievement Stayin'Frosty, TODO merge with Java
         // version.
         std::shared_ptr<Player> plr =
-            dynamic_pointer_cast<Player>(shared_from_this());
+            std::dynamic_pointer_cast<Player>(shared_from_this());
         if (plr != NULL && source == DamageSource::lava) // Only award when in
                                                          // lava (not any fire).
         {
@@ -620,14 +620,15 @@ bool Mob::hurt(DamageSource* source, int dmg) {
 
     std::shared_ptr<Entity> sourceEntity = source->getEntity();
     if (sourceEntity != NULL) {
-        if (dynamic_pointer_cast<Mob>(sourceEntity) != NULL) {
-            setLastHurtByMob(dynamic_pointer_cast<Mob>(sourceEntity));
+        if (std::dynamic_pointer_cast<Mob>(sourceEntity) != NULL) {
+            setLastHurtByMob(std::dynamic_pointer_cast<Mob>(sourceEntity));
         }
-        if (dynamic_pointer_cast<Player>(sourceEntity) != NULL) {
+        if (std::dynamic_pointer_cast<Player>(sourceEntity) != NULL) {
             lastHurtByPlayerTime = PLAYER_HURT_EXPERIENCE_TIME;
-            lastHurtByPlayer     = dynamic_pointer_cast<Player>(sourceEntity);
-        } else if (dynamic_pointer_cast<Wolf>(sourceEntity)) {
-            std::shared_ptr<Wolf> w = dynamic_pointer_cast<Wolf>(sourceEntity);
+            lastHurtByPlayer = std::dynamic_pointer_cast<Player>(sourceEntity);
+        } else if (std::dynamic_pointer_cast<Wolf>(sourceEntity)) {
+            std::shared_ptr<Wolf> w =
+                std::dynamic_pointer_cast<Wolf>(sourceEntity);
             if (w->isTame()) {
                 lastHurtByPlayerTime = PLAYER_HURT_EXPERIENCE_TIME;
                 lastHurtByPlayer     = nullptr;
@@ -764,14 +765,16 @@ void Mob::die(DamageSource* source) {
         sourceEntity->awardKillScore(shared_from_this(), deathScore);
 
     if (sourceEntity != NULL)
-        sourceEntity->killed(dynamic_pointer_cast<Mob>(shared_from_this()));
+        sourceEntity->killed(
+            std::dynamic_pointer_cast<Mob>(shared_from_this())
+        );
 
     dead = true;
 
     if (!level->isClientSide) {
         int                     playerBonus = 0;
         std::shared_ptr<Player> player =
-            dynamic_pointer_cast<Player>(sourceEntity);
+            std::dynamic_pointer_cast<Player>(sourceEntity);
         if (player != NULL) {
             playerBonus =
                 EnchantmentHelper::getKillingLootBonus(player->inventory);
@@ -792,7 +795,7 @@ void Mob::die(DamageSource* source) {
                 GenericStats::killMob(),
                 GenericStats::param_mobKill(
                     player,
-                    dynamic_pointer_cast<Mob>(shared_from_this()),
+                    std::dynamic_pointer_cast<Mob>(shared_from_this()),
                     source
                 )
             );
@@ -866,14 +869,14 @@ void Mob::causeFallDamage(float distance) {
 
 void Mob::travel(float xa, float ya) {
 #ifdef __PSVITA__
-    // AP - dynamic_pointer_cast is a non-trivial call
+    // AP - std::dynamic_pointer_cast is a non-trivial call
     Player* thisPlayer = NULL;
     if ((GetType() & eTYPE_PLAYER) == eTYPE_PLAYER) {
         thisPlayer = (Player*)this;
     }
 #else
     std::shared_ptr<Player> thisPlayer =
-        dynamic_pointer_cast<Player>(shared_from_this());
+        std::dynamic_pointer_cast<Player>(shared_from_this());
 #endif
     if (isInWater() && !(thisPlayer && thisPlayer->abilities.flying)) {
         double yo = y;
@@ -948,7 +951,8 @@ void Mob::travel(float xa, float ya) {
             if (yd < -0.15) yd = -0.15;
             bool playerSneaking =
                 isSneaking()
-                && dynamic_pointer_cast<Player>(shared_from_this()) != NULL;
+                && std::dynamic_pointer_cast<Player>(shared_from_this())
+                       != NULL;
             if (playerSneaking && yd < 0) yd = 0;
         }
 
@@ -1299,7 +1303,7 @@ void Mob::lookAt(std::shared_ptr<Entity> e, float yMax, float xMax) {
     double yd;
     double zd = e->z - z;
 
-    std::shared_ptr<Mob> mob = dynamic_pointer_cast<Mob>(e);
+    std::shared_ptr<Mob> mob = std::dynamic_pointer_cast<Mob>(e);
     if (mob != NULL) {
         yd = (y + getHeadHeight()) - (mob->y + mob->getHeadHeight());
     } else {
@@ -1468,7 +1472,7 @@ void Mob::tickEffects() {
     for (auto it = activeEffects.begin(); it != activeEffects.end();) {
         MobEffectInstance* effect = it->second;
         removed                   = false;
-        if (!effect->tick(dynamic_pointer_cast<Mob>(shared_from_this()))) {
+        if (!effect->tick(std::dynamic_pointer_cast<Mob>(shared_from_this()))) {
             if (!level->isClientSide) {
                 it = activeEffects.erase(it);
                 onEffectRemoved(effect);

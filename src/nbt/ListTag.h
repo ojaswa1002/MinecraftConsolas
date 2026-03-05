@@ -1,5 +1,8 @@
 #pragma once
 
+#include "util/java/InputOutputStream/DataInput.h"
+#include "util/java/InputOutputStream/DataOutput.h"
+
 #include "Tag.h"
 
 template <class T>
@@ -22,6 +25,7 @@ public:
         auto itEnd = list.end();
         for (auto it = list.begin(); it != itEnd; it++) (*it)->write(dos);
     }
+
     void load(DataInput* dis) {
         type     = dis->readByte();
         int size = dis->readInt();

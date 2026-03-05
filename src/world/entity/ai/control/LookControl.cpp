@@ -23,7 +23,7 @@ void LookControl::setLookAt(
     float                   xMax
 ) {
     this->wantedX                  = target->x;
-    std::shared_ptr<Mob> targetMob = dynamic_pointer_cast<Mob>(target);
+    std::shared_ptr<Mob> targetMob = std::dynamic_pointer_cast<Mob>(target);
     if (targetMob != NULL)
         this->wantedY = target->y + targetMob->getHeadHeight();
     else this->wantedY = (target->bb->y0 + target->bb->y1) / 2;

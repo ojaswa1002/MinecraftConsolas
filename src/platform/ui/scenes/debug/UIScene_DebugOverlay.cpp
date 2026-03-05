@@ -221,7 +221,7 @@ void UIScene_DebugOverlay::handlePress(F64 controlId, F64 childId) {
         );
         conn->send(
             GiveItemCommand::preparePacket(
-                dynamic_pointer_cast<Player>(
+                std::dynamic_pointer_cast<Player>(
                     Minecraft::GetInstance()
                         ->localplayers[ProfileManager.GetPrimaryPad()]
                 ),
@@ -246,7 +246,7 @@ void UIScene_DebugOverlay::handlePress(F64 controlId, F64 childId) {
         );
         conn->send(
             EnchantItemCommand::preparePacket(
-                dynamic_pointer_cast<Player>(
+                std::dynamic_pointer_cast<Player>(
                     Minecraft::GetInstance()
                         ->localplayers[ProfileManager.GetPrimaryPad()]
                 ),

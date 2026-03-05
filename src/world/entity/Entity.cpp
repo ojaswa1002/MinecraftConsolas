@@ -684,7 +684,7 @@ void Entity::move(
 
     bool isPlayerSneaking =
         onGround && isSneaking()
-        && dynamic_pointer_cast<Player>(shared_from_this()) != NULL;
+        && std::dynamic_pointer_cast<Player>(shared_from_this()) != NULL;
 
     if (isPlayerSneaking) {
         double d = 0.05;
@@ -1033,7 +1033,7 @@ bool Entity::makeStepSound() { return true; }
 void Entity::checkFallDamage(double ya, bool onGround) {
     if (onGround) {
         if (fallDistance > 0) {
-            if (dynamic_pointer_cast<Mob>(shared_from_this()) != NULL) {
+            if (std::dynamic_pointer_cast<Mob>(shared_from_this()) != NULL) {
                 int xt = Mth::floor(x);
                 int yt = Mth::floor(y - 0.2f - this->heightOffset);
                 int zt = Mth::floor(z);
@@ -1507,7 +1507,7 @@ void Entity::positionRider() {
     std::shared_ptr<Entity> lockedRider = rider.lock();
     if (lockedRider) {
         std::shared_ptr<Player> player =
-            dynamic_pointer_cast<Player>(lockedRider);
+            std::dynamic_pointer_cast<Player>(lockedRider);
         if (!(player && player->isLocalPlayer())) {
             lockedRider->xOld = xOld;
             lockedRider->yOld =

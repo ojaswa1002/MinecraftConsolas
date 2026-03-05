@@ -8,6 +8,7 @@
 
 #include <windows.h>
 
+#include "nbt/CompoundTag.h" // IWYU pragma: keep
 #include "nbt/ListTag.h"
 #include "util/console/StringHelpers.h"
 #include "win/Windows64_App.h"

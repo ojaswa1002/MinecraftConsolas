@@ -649,7 +649,7 @@ void LevelRenderer::renderEntities(Vec3* cam, Culler* culler, float a) {
             // !mc->options->thirdPersonView &&
             // !mc->cameraTargetPlayer->isSleeping()) continue;
             std::shared_ptr<LocalPlayer> localplayer =
-                dynamic_pointer_cast<LocalPlayer>(mc->cameraTargetPlayer);
+                std::dynamic_pointer_cast<LocalPlayer>(mc->cameraTargetPlayer);
 
             if (localplayer && entity == mc->cameraTargetPlayer
                 && !localplayer->ThirdPersonView()
@@ -3423,7 +3423,7 @@ std::shared_ptr<Particle> LevelRenderer::addParticleInternal(
         particle = std::shared_ptr<Particle>(
             new SpellParticle(lev, x, y, z, xa, ya, za)
         );
-        dynamic_pointer_cast<SpellParticle>(particle)->setBaseTex(9 * 16);
+        std::dynamic_pointer_cast<SpellParticle>(particle)->setBaseTex(9 * 16);
         break;
     case eParticleType_note:
         particle = std::shared_ptr<Particle>(
@@ -3548,7 +3548,7 @@ std::shared_ptr<Particle> LevelRenderer::addParticleInternal(
                    && (eParticleType <= eParticleType_tilecrack_last)) {
             int id   = PARTICLE_CRACK_ID(eParticleType),
                 data = PARTICLE_CRACK_DATA(eParticleType);
-            particle = dynamic_pointer_cast<Particle>(
+            particle = std::dynamic_pointer_cast<Particle>(
                 std::shared_ptr<TerrainParticle>(new TerrainParticle(
                                                      lev,
                                                      x,

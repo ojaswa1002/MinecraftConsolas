@@ -66,7 +66,7 @@ int DiggerItemHint::attack(
         if (itemFound) {
             // It's also possible that we could hit TileEntities (eg falling
             // sand) so don't want to give this hint then
-            if (dynamic_pointer_cast<Mob>(entity) != NULL) {
+            if (std::dynamic_pointer_cast<Mob>(entity) != NULL) {
                 return IDS_TUTORIAL_HINT_ATTACK_WITH_TOOL;
             } else {
                 return -1;

@@ -38,7 +38,7 @@ void HurtByTargetGoal::start() {
                     ->grow(within, 4, within)
             );
         for (auto it = nearby->begin(); it != nearby->end(); ++it) {
-            std::shared_ptr<Mob> other = dynamic_pointer_cast<Mob>(*it);
+            std::shared_ptr<Mob> other = std::dynamic_pointer_cast<Mob>(*it);
             if (this->mob->shared_from_this() == other) continue;
             if (other->getTarget() != NULL) continue;
             other->setTarget(mob->getLastHurtByMob());

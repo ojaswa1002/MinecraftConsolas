@@ -138,7 +138,7 @@ void DragonModel::render(
 ) {
     glPushMatrix();
     std::shared_ptr<EnderDragon> dragon =
-        dynamic_pointer_cast<EnderDragon>(entity);
+        std::dynamic_pointer_cast<EnderDragon>(entity);
 
     float ttt = dragon->oFlapTime + (dragon->flapTime - dragon->oFlapTime) * a;
     jaw->xRot = (float)(Mth::sin(ttt * PI * 2) + 1) * 0.2f;

@@ -53,7 +53,7 @@ void MobRenderer::render(
     // 4J - added - this used to use generics so the input parameter could be a
     // mob (or derived type), but we aren't able to do that so dynamically
     // casting to get the more specific type here.
-    std::shared_ptr<Mob> mob = dynamic_pointer_cast<Mob>(_mob);
+    std::shared_ptr<Mob> mob = std::dynamic_pointer_cast<Mob>(_mob);
     glPushMatrix();
     glDisable(GL_CULL_FACE);
 
@@ -70,8 +70,9 @@ void MobRenderer::render(
     float bodyRot = rotlerp(mob->yBodyRotO, mob->yBodyRot, a);
     float headRot = rotlerp(mob->yHeadRotO, mob->yHeadRot, a);
 
-    if (mob->isRiding() && dynamic_pointer_cast<Mob>(mob->riding)) {
-        std::shared_ptr<Mob> riding = dynamic_pointer_cast<Mob>(mob->riding);
+    if (mob->isRiding() && std::dynamic_pointer_cast<Mob>(mob->riding)) {
+        std::shared_ptr<Mob> riding =
+            std::dynamic_pointer_cast<Mob>(mob->riding);
         bodyRot = rotlerp(riding->yBodyRotO, riding->yBodyRot, a);
 
         float headDiff = Mth::wrapDegrees(headRot - bodyRot);
@@ -319,7 +320,7 @@ void MobRenderer::renderModel(
     float                   scale
 ) {
     std::shared_ptr<Player> player =
-        dynamic_pointer_cast<Player>(Minecraft::GetInstance()->player);
+        std::dynamic_pointer_cast<Player>(Minecraft::GetInstance()->player);
 
     bindTexture(mob->customTextureUrl, mob->getTexture());
     if (!mob->isInvisible()) {
@@ -504,7 +505,7 @@ void MobRenderer::renderNameTag(
     Tesselator* t = Tesselator::getInstance();
 
     int                     offs   = 0;
-    std::shared_ptr<Player> player = dynamic_pointer_cast<Player>(mob);
+    std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(mob);
     if (player != NULL && app.isXuidDeadmau5(player->getXuid())) offs = -10;
 
     std::wstring playerName;

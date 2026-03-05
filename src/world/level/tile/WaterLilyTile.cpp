@@ -38,7 +38,7 @@ void WaterlilyTile::addAABBs(
     AABBList*               boxes,
     std::shared_ptr<Entity> source
 ) {
-    if (source == NULL || !(dynamic_pointer_cast<Boat>(source))) {
+    if (source == NULL || !(std::dynamic_pointer_cast<Boat>(source))) {
         Bush::addAABBs(level, x, y, z, box, boxes, source);
     }
 }

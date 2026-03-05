@@ -56,7 +56,7 @@ void ItemRenderer::render(
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
     std::shared_ptr<ItemEntity> itemEntity =
-        dynamic_pointer_cast<ItemEntity>(_itemEntity);
+        std::dynamic_pointer_cast<ItemEntity>(_itemEntity);
 
     random->setSeed(187);
     std::shared_ptr<ItemInstance> item = itemEntity->getItem();

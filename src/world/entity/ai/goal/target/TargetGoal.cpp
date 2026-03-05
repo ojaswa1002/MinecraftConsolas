@@ -65,15 +65,16 @@ bool TargetGoal::canAttack(
     if (!mob->canAttackType(target->GetType())) return false;
 
     std::shared_ptr<TamableAnimal> tamableAnimal =
-        dynamic_pointer_cast<TamableAnimal>(mob->shared_from_this());
+        std::dynamic_pointer_cast<TamableAnimal>(mob->shared_from_this());
     if (tamableAnimal != NULL && tamableAnimal->isTame()) {
         std::shared_ptr<TamableAnimal> tamableTarget =
-            dynamic_pointer_cast<TamableAnimal>(target);
+            std::dynamic_pointer_cast<TamableAnimal>(target);
         if (tamableTarget != NULL && tamableTarget->isTame()) return false;
         if (target == tamableAnimal->getOwner()) return false;
-    } else if (dynamic_pointer_cast<Player>(target) != NULL) {
+    } else if (std::dynamic_pointer_cast<Player>(target) != NULL) {
         if (!allowInvulnerable
-            && (dynamic_pointer_cast<Player>(target))->abilities.invulnerable)
+            && (std::dynamic_pointer_cast<Player>(target))
+                   ->abilities.invulnerable)
             return false;
     }
 

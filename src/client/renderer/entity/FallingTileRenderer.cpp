@@ -32,7 +32,7 @@ void FallingTileRenderer::render(
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
     std::shared_ptr<FallingTile> tile =
-        dynamic_pointer_cast<FallingTile>(_tile);
+        std::dynamic_pointer_cast<FallingTile>(_tile);
     glPushMatrix();
     glTranslatef((float)x, (float)y, (float)z);
 

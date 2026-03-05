@@ -541,7 +541,7 @@ void Inventory::hurtArmor(int dmg) {
             && dynamic_cast<ArmorItem*>(armor[i]->getItem()) != NULL) {
             armor[i]->hurt(
                 dmg,
-                dynamic_pointer_cast<Mob>(player->shared_from_this())
+                std::dynamic_pointer_cast<Mob>(player->shared_from_this())
             );
             if (armor[i]->count == 0) {
                 armor[i] = nullptr;

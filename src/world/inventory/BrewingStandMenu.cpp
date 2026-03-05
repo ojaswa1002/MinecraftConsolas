@@ -22,21 +22,27 @@ BrewingStandMenu::BrewingStandMenu(
     this->brewingStand = brewingStand;
 
     addSlot(new PotionSlot(
-        dynamic_pointer_cast<Player>(inventory->player->shared_from_this()),
+        std::dynamic_pointer_cast<Player>(
+            inventory->player->shared_from_this()
+        ),
         brewingStand,
         0,
         56,
         46
     ));
     addSlot(new PotionSlot(
-        dynamic_pointer_cast<Player>(inventory->player->shared_from_this()),
+        std::dynamic_pointer_cast<Player>(
+            inventory->player->shared_from_this()
+        ),
         brewingStand,
         1,
         79,
         53
     ));
     addSlot(new PotionSlot(
-        dynamic_pointer_cast<Player>(inventory->player->shared_from_this()),
+        std::dynamic_pointer_cast<Player>(
+            inventory->player->shared_from_this()
+        ),
         brewingStand,
         2,
         102,
@@ -250,7 +256,7 @@ void BrewingStandMenu::PotionSlot::onTake(
 ) {
     carried->onCraftedBy(
         this->player->level,
-        dynamic_pointer_cast<Player>(this->player->shared_from_this()),
+        std::dynamic_pointer_cast<Player>(this->player->shared_from_this()),
         1
     );
     if (carried->id == Item::potion_Id && carried->getAuxValue() > 0)

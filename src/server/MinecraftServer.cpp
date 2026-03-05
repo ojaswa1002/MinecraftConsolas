@@ -1435,7 +1435,7 @@ void       MinecraftServer::run(std::int64_t seed, void* lpParameter) {
                     std::shared_ptr<ServerPlayer> player =
                         players->players.at(0);
                     eINSTANCEOF          factory = (eINSTANCEOF)((size_t)param);
-                    std::shared_ptr<Mob> mob     = dynamic_pointer_cast<Mob>(
+                    std::shared_ptr<Mob> mob = std::dynamic_pointer_cast<Mob>(
                         EntityIO::newByEnumType(factory, player->level)
                     );
                     mob->moveTo(

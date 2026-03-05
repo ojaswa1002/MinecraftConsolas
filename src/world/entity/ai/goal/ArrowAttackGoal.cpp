@@ -79,7 +79,7 @@ void ArrowAttackGoal::fireAtTarget() {
     if (projectileType == ArrowType) {
         std::shared_ptr<Arrow> arrow = std::shared_ptr<Arrow>(new Arrow(
             level,
-            dynamic_pointer_cast<Mob>(mob->shared_from_this()),
+            std::dynamic_pointer_cast<Mob>(mob->shared_from_this()),
             tar,
             1.60f,
             12
@@ -95,7 +95,7 @@ void ArrowAttackGoal::fireAtTarget() {
         std::shared_ptr<Snowball> snowball =
             std::shared_ptr<Snowball>(new Snowball(
                 level,
-                dynamic_pointer_cast<Mob>(mob->shared_from_this())
+                std::dynamic_pointer_cast<Mob>(mob->shared_from_this())
             ));
         double xd = tar->x - mob->x;
         double yd = (tar->y + tar->getHeadHeight() - 1.1f) - snowball->y;

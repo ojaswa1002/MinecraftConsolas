@@ -62,7 +62,7 @@ void ServerLevelListener::entityRemoved(std::shared_ptr<Entity> entity) {
 // 4J added
 void ServerLevelListener::playerRemoved(std::shared_ptr<Entity> entity) {
     std::shared_ptr<ServerPlayer> player =
-        dynamic_pointer_cast<ServerPlayer>(entity);
+        std::dynamic_pointer_cast<ServerPlayer>(entity);
     player->getLevel()->getTracker()->removePlayer(entity);
 }
 
@@ -118,7 +118,8 @@ void ServerLevelListener::playSound(
         // since we're already playing these in the LevelRenderer::playSound.
         // The PC version does seem to do this and the result is I can stop
         // walking , and then I'll hear my footstep sound with a delay
-        std::shared_ptr<Player> player = dynamic_pointer_cast<Player>(entity);
+        std::shared_ptr<Player> player =
+            std::dynamic_pointer_cast<Player>(entity);
         server->getPlayers()->broadcast(
             player,
             x,

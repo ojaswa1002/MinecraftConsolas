@@ -1793,16 +1793,16 @@ void LevelChunk::getEntitiesOfClass(
             // our class may be derived from, otherwise do a direct comparison
             // of type_info
             if (ec == typeid(Player)) {
-                if (dynamic_pointer_cast<Player>(e) != NULL)
+                if (std::dynamic_pointer_cast<Player>(e) != NULL)
                     isAssignableFrom = true;
             } else if (ec == typeid(Mob)) {
-                if (dynamic_pointer_cast<Mob>(e) != NULL)
+                if (std::dynamic_pointer_cast<Mob>(e) != NULL)
                     isAssignableFrom = true;
             } else if (ec == typeid(Monster)) {
-                if (dynamic_pointer_cast<Monster>(e) != NULL)
+                if (std::dynamic_pointer_cast<Monster>(e) != NULL)
                     isAssignableFrom = true;
             } else if (ec == typeid(Zombie)) {
-                if (dynamic_pointer_cast<Zombie>(e) != NULL)
+                if (std::dynamic_pointer_cast<Zombie>(e) != NULL)
                     isAssignableFrom = true;
             } else if (e != NULL && ec == typeid(*(e.get())))
                 isAssignableFrom = true;

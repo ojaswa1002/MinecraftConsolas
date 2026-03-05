@@ -108,7 +108,7 @@ bool OcelotSitOnTileGoal::isValidTarget(Level* level, int x, int y, int z) {
 
     if (tile == Tile::chest_Id) {
         std::shared_ptr<ChestTileEntity> chest =
-            dynamic_pointer_cast<ChestTileEntity>(
+            std::dynamic_pointer_cast<ChestTileEntity>(
                 level->getTileEntity(x, y, z)
             );
 

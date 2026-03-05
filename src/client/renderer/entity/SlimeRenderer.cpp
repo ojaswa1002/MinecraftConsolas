@@ -22,7 +22,7 @@ int SlimeRenderer::prepareArmor(
 ) {
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
-    std::shared_ptr<Slime> slime = dynamic_pointer_cast<Slime>(_slime);
+    std::shared_ptr<Slime> slime = std::dynamic_pointer_cast<Slime>(_slime);
 
     if (slime->isInvisible()) return 0;
 
@@ -45,7 +45,7 @@ int SlimeRenderer::prepareArmor(
 void SlimeRenderer::scale(std::shared_ptr<Mob> _slime, float a) {
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
-    std::shared_ptr<Slime> slime = dynamic_pointer_cast<Slime>(_slime);
+    std::shared_ptr<Slime> slime = std::dynamic_pointer_cast<Slime>(_slime);
 
     float size = (float)slime->getSize();
     float ss   = (slime->oSquish + (slime->squish - slime->oSquish) * a)

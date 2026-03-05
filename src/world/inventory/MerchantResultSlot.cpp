@@ -51,7 +51,7 @@ void MerchantResultSlot::checkTakeAchievements(
 ) {
     carried->onCraftedBy(
         player->level,
-        dynamic_pointer_cast<Player>(player->shared_from_this()),
+        std::dynamic_pointer_cast<Player>(player->shared_from_this()),
         removeCount
     );
     removeCount = 0;

@@ -50,7 +50,7 @@ std::shared_ptr<ChatPacket> IndirectEntityDamageSource::getDeathMessagePacket(
         type = owner->GetType();
         if (type == eTYPE_SERVERPLAYER) {
             std::shared_ptr<Player> sourcePlayer =
-                dynamic_pointer_cast<Player>(owner);
+                std::dynamic_pointer_cast<Player>(owner);
             if (sourcePlayer != NULL) additional = sourcePlayer->name;
         }
     } else {

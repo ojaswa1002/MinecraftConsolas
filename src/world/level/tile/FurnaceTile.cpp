@@ -129,7 +129,9 @@ bool FurnaceTile::
         return true;
     }
     std::shared_ptr<FurnaceTileEntity> furnace =
-        dynamic_pointer_cast<FurnaceTileEntity>(level->getTileEntity(x, y, z));
+        std::dynamic_pointer_cast<FurnaceTileEntity>(
+            level->getTileEntity(x, y, z)
+        );
     if (furnace != NULL) player->openFurnace(furnace);
     return true;
 }
@@ -179,7 +181,7 @@ void FurnaceTile::onRemove(
 ) {
     if (!noDrop) {
         std::shared_ptr<Container> container =
-            dynamic_pointer_cast<FurnaceTileEntity>(
+            std::dynamic_pointer_cast<FurnaceTileEntity>(
                 level->getTileEntity(x, y, z)
             );
         if (container != NULL) {

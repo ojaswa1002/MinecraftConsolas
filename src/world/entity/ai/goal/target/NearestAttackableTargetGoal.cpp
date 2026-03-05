@@ -67,7 +67,8 @@ bool NearestAttackableTargetGoal::canUse() {
         // Collections.sort(entities, distComp);
         std::sort(entities->begin(), entities->end(), *distComp);
         for (auto it = entities->begin(); it != entities->end(); ++it) {
-            std::shared_ptr<Mob> potTarget = dynamic_pointer_cast<Mob>(*it);
+            std::shared_ptr<Mob> potTarget =
+                std::dynamic_pointer_cast<Mob>(*it);
             if (canAttack(potTarget, false)) {
                 target = std::weak_ptr<Mob>(potTarget);
                 return true;

@@ -80,7 +80,7 @@ void TreeTile::setPlacedBy(
         x,
         y,
         z,
-        dynamic_pointer_cast<Player>(by)
+        std::dynamic_pointer_cast<Player>(by)
     );
     int facing = 0;
 

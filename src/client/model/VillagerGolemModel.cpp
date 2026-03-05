@@ -86,7 +86,7 @@ void VillagerGolemModel::prepareMobModel(
     float                a
 ) {
     std::shared_ptr<VillagerGolem> vg =
-        dynamic_pointer_cast<VillagerGolem>(mob);
+        std::dynamic_pointer_cast<VillagerGolem>(mob);
     int attackTick = vg->getAttackAnimationTick();
     if (attackTick > 0) {
         arm0->xRot = (-2.0f + 1.5f * triangleWave(attackTick - a, 10));

@@ -21,7 +21,7 @@ void MobSpawnerRenderer::render(
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
     std::shared_ptr<MobSpawnerTileEntity> spawner =
-        dynamic_pointer_cast<MobSpawnerTileEntity>(_spawner);
+        std::dynamic_pointer_cast<MobSpawnerTileEntity>(_spawner);
 
     glPushMatrix();
     glTranslatef((float)x + 0.5f, (float)y, (float)z + 0.5f);

@@ -212,8 +212,10 @@ void EnderMan::aiStep() {
 
     if (!level->isClientSide && isAlive()) {
         if (attackTarget != NULL) {
-            if (dynamic_pointer_cast<Player>(attackTarget) != NULL
-                && isLookingAtMe(dynamic_pointer_cast<Player>(attackTarget))) {
+            if (std::dynamic_pointer_cast<Player>(attackTarget) != NULL
+                && isLookingAtMe(
+                    std::dynamic_pointer_cast<Player>(attackTarget)
+                )) {
                 xxa = yya = 0;
                 runSpeed  = 0;
                 if (attackTarget->distanceToSqr(shared_from_this()) < 4 * 4) {

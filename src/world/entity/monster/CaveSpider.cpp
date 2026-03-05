@@ -28,7 +28,7 @@ float CaveSpider::getModelScale() { return .7f; }
 
 bool CaveSpider::doHurtTarget(std::shared_ptr<Entity> target) {
     if (Spider::doHurtTarget(target)) {
-        if (dynamic_pointer_cast<Mob>(target) != NULL) {
+        if (std::dynamic_pointer_cast<Mob>(target) != NULL) {
             int poisonTime = 0;
             if (level->difficulty <= Difficulty::EASY) {
                 // No poison!
@@ -39,7 +39,7 @@ bool CaveSpider::doHurtTarget(std::shared_ptr<Entity> target) {
             }
 
             if (poisonTime > 0) {
-                dynamic_pointer_cast<Mob>(target)->addEffect(
+                std::dynamic_pointer_cast<Mob>(target)->addEffect(
                     new MobEffectInstance(
                         MobEffect::poison->id,
                         poisonTime * SharedConstants::TICKS_PER_SECOND,

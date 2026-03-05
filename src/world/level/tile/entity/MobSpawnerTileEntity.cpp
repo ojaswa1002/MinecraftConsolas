@@ -79,8 +79,9 @@ void MobSpawnerTileEntity::tick() {
         }
 
         for (int c = 0; c < spawnCount; c++) {
-            std::shared_ptr<Mob> entity =
-                dynamic_pointer_cast<Mob>(EntityIO::newEntity(entityId, level));
+            std::shared_ptr<Mob> entity = std::dynamic_pointer_cast<Mob>(
+                EntityIO::newEntity(entityId, level)
+            );
             if (entity == NULL) return;
 
             std::vector<std::shared_ptr<Entity>>* vecNearby =
@@ -117,7 +118,8 @@ void MobSpawnerTileEntity::tick() {
                           + (level->random->nextDouble()
                              - level->random->nextDouble())
                                 * 4;
-                std::shared_ptr<Mob> mob = dynamic_pointer_cast<Mob>(entity);
+                std::shared_ptr<Mob> mob =
+                    std::dynamic_pointer_cast<Mob>(entity);
 
                 entity->moveTo(xp, yp, zp, level->random->nextFloat() * 360, 0);
 

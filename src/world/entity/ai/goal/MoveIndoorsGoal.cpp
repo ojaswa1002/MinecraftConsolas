@@ -63,7 +63,7 @@ void MoveIndoorsGoal::start() {
         )
         > 16 * 16) {
         Vec3* pos = RandomPos::getPosTowards(
-            dynamic_pointer_cast<PathfinderMob>(mob->shared_from_this()),
+            std::dynamic_pointer_cast<PathfinderMob>(mob->shared_from_this()),
             14,
             3,
             Vec3::newTemp(

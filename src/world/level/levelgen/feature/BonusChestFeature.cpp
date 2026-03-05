@@ -80,7 +80,7 @@ bool BonusChestFeature::place(
                 && level->isTopSolidBlocking(x2, y2 - 1, z2))) {
             level->setTile(x2, y2, z2, Tile::chest_Id);
             std::shared_ptr<ChestTileEntity> chest =
-                dynamic_pointer_cast<ChestTileEntity>(
+                std::dynamic_pointer_cast<ChestTileEntity>(
                     level->getTileEntity(x2, y2, z2)
                 );
             if (chest != NULL) {

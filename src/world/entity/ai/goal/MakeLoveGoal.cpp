@@ -48,7 +48,8 @@ bool MakeLoveGoal::canUse() {
     );
     if (mate == NULL) return false;
 
-    partner = std::weak_ptr<Villager>(dynamic_pointer_cast<Villager>(mate));
+    partner =
+        std::weak_ptr<Villager>(std::dynamic_pointer_cast<Villager>(mate));
     if (partner.lock()->getAge() != 0) return false;
 
     return true;

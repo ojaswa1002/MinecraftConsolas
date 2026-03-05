@@ -159,7 +159,7 @@ bool HangingEntity::survives() {
                 auto itEnd = entities->end();
                 for (auto it = entities->begin(); it != itEnd; it++) {
                     std::shared_ptr<Entity> e = (*it);
-                    if (dynamic_pointer_cast<HangingEntity>(e) != NULL) {
+                    if (std::dynamic_pointer_cast<HangingEntity>(e) != NULL) {
                         return false;
                     }
                 }
@@ -174,7 +174,9 @@ bool HangingEntity::isPickable() { return true; }
 bool HangingEntity::skipAttackInteraction(std::shared_ptr<Entity> source) {
     if (source->GetType() == eTYPE_PLAYER) {
         return hurt(
-            DamageSource::playerAttack(dynamic_pointer_cast<Player>(source)),
+            DamageSource::playerAttack(
+                std::dynamic_pointer_cast<Player>(source)
+            ),
             0
         );
     }
@@ -186,8 +188,8 @@ bool HangingEntity::hurt(DamageSource* source, int damage) {
         if (dynamic_cast<EntityDamageSource*>(source) != NULL) {
             std::shared_ptr<Entity> sourceEntity = source->getDirectEntity();
 
-            if (dynamic_pointer_cast<Player>(sourceEntity) != NULL
-                && !dynamic_pointer_cast<Player>(sourceEntity)
+            if (std::dynamic_pointer_cast<Player>(sourceEntity) != NULL
+                && !std::dynamic_pointer_cast<Player>(sourceEntity)
                         ->isAllowedToHurtEntity(shared_from_this())) {
                 return false;
             }
@@ -202,7 +204,7 @@ bool HangingEntity::hurt(DamageSource* source, int damage) {
             && ((e->GetType() & eTYPE_PLAYER)
                 != 0)) // check if it's serverplayer or player
         {
-            player = dynamic_pointer_cast<Player>(e);
+            player = std::dynamic_pointer_cast<Player>(e);
         }
 
         if (player != NULL && player->abilities.instabuild) {

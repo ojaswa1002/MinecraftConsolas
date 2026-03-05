@@ -27,7 +27,7 @@ void EnderCrystalRenderer::render(
     // type EnderCrystal rather than std::shared_ptr<Entity>  we have here - do
     // some casting around instead
     std::shared_ptr<EnderCrystal> crystal =
-        dynamic_pointer_cast<EnderCrystal>(_crystal);
+        std::dynamic_pointer_cast<EnderCrystal>(_crystal);
     if (currentModel != EnderCrystalModel::MODEL_ID) {
         model        = new EnderCrystalModel(0);
         currentModel = EnderCrystalModel::MODEL_ID;

@@ -27,7 +27,7 @@ void EnchantTableRenderer::render(
 ) {
     // 4J Convert as we aren't using a templated class
     std::shared_ptr<EnchantmentTableEntity> table =
-        dynamic_pointer_cast<EnchantmentTableEntity>(_table);
+        std::dynamic_pointer_cast<EnchantmentTableEntity>(_table);
 
 #ifdef __PSVITA__
     // AP - the book pages are made with 0 depth so the front and back polys are

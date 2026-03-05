@@ -21,7 +21,7 @@ void EnderChestRenderer::render(
 ) {
     // 4J Convert as we aren't using a templated class
     std::shared_ptr<EnderChestTileEntity> chest =
-        dynamic_pointer_cast<EnderChestTileEntity>(_chest);
+        std::dynamic_pointer_cast<EnderChestTileEntity>(_chest);
 
     int data = 0;
 

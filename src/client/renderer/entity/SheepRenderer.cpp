@@ -25,7 +25,7 @@ int SheepRenderer::prepareArmor(
 ) {
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
-    std::shared_ptr<Sheep> sheep = dynamic_pointer_cast<Sheep>(_sheep);
+    std::shared_ptr<Sheep> sheep = std::dynamic_pointer_cast<Sheep>(_sheep);
 
     if (layer == 0 && !sheep->isSheared()
         && !sheep->isInvisibleTo(

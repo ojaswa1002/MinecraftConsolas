@@ -778,7 +778,7 @@ bool StructurePiece::createChest(
         if (level->getTile(worldX, worldY, worldZ) != Tile::chest->id) {
             level->setTile(worldX, worldY, worldZ, Tile::chest->id);
             std::shared_ptr<ChestTileEntity> chest =
-                dynamic_pointer_cast<ChestTileEntity>(
+                std::dynamic_pointer_cast<ChestTileEntity>(
                     level->getTileEntity(worldX, worldY, worldZ)
                 );
             if (chest != NULL)
@@ -819,7 +819,7 @@ bool StructurePiece::createDispenser(
                 getOrientationData(Tile::dispenser_Id, facing)
             );
             std::shared_ptr<DispenserTileEntity> dispenser =
-                dynamic_pointer_cast<DispenserTileEntity>(
+                std::dynamic_pointer_cast<DispenserTileEntity>(
                     level->getTileEntity(worldX, worldY, worldZ)
                 );
             if (dispenser != NULL)

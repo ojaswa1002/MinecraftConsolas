@@ -87,7 +87,7 @@ void TheEndPortal::entityInside(
     std::shared_ptr<Entity> entity
 ) {
     if (entity->riding == NULL && entity->rider.lock() == NULL) {
-        if (dynamic_pointer_cast<Player>(entity) != NULL) {
+        if (std::dynamic_pointer_cast<Player>(entity) != NULL) {
             if (!level->isClientSide) {
                 // 4J Stu - Update the level data position so that the
                 // stronghold portal can be shown on the maps
@@ -105,7 +105,7 @@ void TheEndPortal::entityInside(
                     level->getLevelData()->setHasStrongholdEndPortal();
                 }
 
-                (dynamic_pointer_cast<Player>(entity))->changeDimension(1);
+                (std::dynamic_pointer_cast<Player>(entity))->changeDimension(1);
             }
         }
     }

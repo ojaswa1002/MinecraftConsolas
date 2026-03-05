@@ -37,7 +37,7 @@ void ChestRenderer::render(
 ) {
     // 4J Convert as we aren't using a templated class
     std::shared_ptr<ChestTileEntity> chest =
-        dynamic_pointer_cast<ChestTileEntity>(_chest);
+        std::dynamic_pointer_cast<ChestTileEntity>(_chest);
 
     int data;
 

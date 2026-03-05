@@ -21,7 +21,7 @@ void LightningBoltRenderer::render(
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
     std::shared_ptr<LightningBolt> bolt =
-        dynamic_pointer_cast<LightningBolt>(_bolt);
+        std::dynamic_pointer_cast<LightningBolt>(_bolt);
 
     Tesselator* t = Tesselator::getInstance();
 

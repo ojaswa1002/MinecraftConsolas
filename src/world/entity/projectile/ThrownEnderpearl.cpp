@@ -57,7 +57,7 @@ void ThrownEnderpearl::onHit(HitResult* res) {
         // Player leaves the game before the Ender Pearl thrown by him touches
         // the ground. If the owner has been removed, then ignore
         std::shared_ptr<ServerPlayer> serverPlayer =
-            dynamic_pointer_cast<ServerPlayer>(owner);
+            std::dynamic_pointer_cast<ServerPlayer>(owner);
         if (serverPlayer != NULL && !serverPlayer->removed) {
             if (!serverPlayer->connection->done
                 && serverPlayer->level == this->level) {

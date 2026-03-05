@@ -149,7 +149,7 @@ void ItemEntity::mergeWithNeighbours() {
         level->getEntitiesOfClass(typeid(*this), bb->grow(0.5, 0, 0.5));
     for (auto it = neighbours->begin(); it != neighbours->end(); ++it) {
         std::shared_ptr<ItemEntity> entity =
-            dynamic_pointer_cast<ItemEntity>(*it);
+            std::dynamic_pointer_cast<ItemEntity>(*it);
         merge(entity);
     }
     delete neighbours;
@@ -170,7 +170,7 @@ bool ItemEntity::merge(std::shared_ptr<ItemEntity> target) {
         return false;
     if (targetItem->count < myItem->count)
         return target->merge(
-            dynamic_pointer_cast<ItemEntity>(shared_from_this())
+            std::dynamic_pointer_cast<ItemEntity>(shared_from_this())
         );
     if (targetItem->count + myItem->count > targetItem->getMaxStackSize())
         return false;

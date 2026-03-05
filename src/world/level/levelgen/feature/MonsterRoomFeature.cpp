@@ -86,7 +86,7 @@ bool MonsterRoomFeature::place(
 
             level->setTile(xc, yc, zc, Tile::chest_Id);
             std::shared_ptr<ChestTileEntity> chest =
-                dynamic_pointer_cast<ChestTileEntity>(
+                std::dynamic_pointer_cast<ChestTileEntity>(
                     level->getTileEntity(xc, yc, zc)
                 );
             if (chest != NULL) {
@@ -107,7 +107,7 @@ bool MonsterRoomFeature::place(
 
     level->setTile(x, y, z, Tile::mobSpawner_Id);
     std::shared_ptr<MobSpawnerTileEntity> entity =
-        dynamic_pointer_cast<MobSpawnerTileEntity>(
+        std::dynamic_pointer_cast<MobSpawnerTileEntity>(
             level->getTileEntity(x, y, z)
         );
     if (entity != NULL) {

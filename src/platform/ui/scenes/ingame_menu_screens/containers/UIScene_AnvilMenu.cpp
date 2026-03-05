@@ -95,7 +95,7 @@ UIScene_AnvilMenu::UIScene_AnvilMenu(
             m_costString = temp;
             if (!m_repairMenu->getSlot(RepairMenu::RESULT_SLOT)
                      ->mayPickup(
-                         dynamic_pointer_cast<Player>(
+                         std::dynamic_pointer_cast<Player>(
                              m_inventory->player->shared_from_this()
                          )
                      )) {

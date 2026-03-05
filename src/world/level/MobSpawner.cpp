@@ -356,10 +356,12 @@ MobSpawner::tick(ServerLevel* level, bool spawnEnemies, bool spawnFriendlies) {
                         MemSect(29);
                         // mob =
                         // type.mobClass.getConstructor(Level.class).newInstance(level);
-                        mob = dynamic_pointer_cast<Mob>(EntityIO::newByEnumType(
-                            currentMobType->mobClass,
-                            level
-                        ));
+                        mob = std::dynamic_pointer_cast<Mob>(
+                            EntityIO::newByEnumType(
+                                currentMobType->mobClass,
+                                level
+                            )
+                        );
                         MemSect(0);
                         //						   }
                         //						   catch (exception e)
@@ -536,17 +538,17 @@ void MobSpawner::finalizeMobSettings(
     float                yy,
     float                zz
 ) {
-    if (dynamic_pointer_cast<Spider>(mob) != NULL
+    if (std::dynamic_pointer_cast<Spider>(mob) != NULL
         && level->random->nextInt(100) == 0) {
         std::shared_ptr<Skeleton> skeleton =
             std::shared_ptr<Skeleton>(new Skeleton(level));
         skeleton->moveTo(xx, yy, zz, mob->yRot, 0);
         level->addEntity(skeleton);
         skeleton->ride(mob);
-    } else if (dynamic_pointer_cast<Sheep>(mob) != NULL) {
-        (dynamic_pointer_cast<Sheep>(mob))
+    } else if (std::dynamic_pointer_cast<Sheep>(mob) != NULL) {
+        (std::dynamic_pointer_cast<Sheep>(mob))
             ->setColor(Sheep::getSheepColor(level->random));
-    } else if (dynamic_pointer_cast<Ozelot>(mob) != NULL) {
+    } else if (std::dynamic_pointer_cast<Ozelot>(mob) != NULL) {
         if (level->random->nextInt(7) == 0) {
             for (int kitten = 0; kitten < 2; kitten++) {
                 std::shared_ptr<Ozelot> ozelot =
@@ -629,7 +631,7 @@ bool MobSpawner::attackSleepingPlayers(
                     // classes[type].getConstructor(Level.class).newInstance(level);
                     // 4J - there was a classes array here which duplicated the
                     // bedEnemies array but have removed it
-                    mob = dynamic_pointer_cast<Mob>(
+                    mob = std::dynamic_pointer_cast<Mob>(
                         EntityIO::newByEnumType(bedEnemies[type], level)
                     );
                     //					}
@@ -773,7 +775,7 @@ void MobSpawner::postProcessSpawnMobs(
 
 					std::shared_ptr<Mob> mob;
 					//try {
-					mob = dynamic_pointer_cast<Mob>( EntityIO::newByEnumType(type->mobClass, level ) );
+					mob = std::dynamic_pointer_cast<Mob>( EntityIO::newByEnumType(type->mobClass, level ) );
 					//} catch (Exception e) {
 					//	e.printStackTrace();
 					//	continue;

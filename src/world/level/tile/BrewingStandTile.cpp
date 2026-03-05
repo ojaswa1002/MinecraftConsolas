@@ -84,7 +84,7 @@ bool BrewingStandTile::
         return true;
     }
     std::shared_ptr<BrewingStandTileEntity> brewingStand =
-        dynamic_pointer_cast<BrewingStandTileEntity>(
+        std::dynamic_pointer_cast<BrewingStandTileEntity>(
             level->getTileEntity(x, y, z)
         );
     if (brewingStand != NULL) player->openBrewingStand(brewingStand);
@@ -117,9 +117,10 @@ void BrewingStandTile::onRemove(
 ) {
     std::shared_ptr<TileEntity> tileEntity = level->getTileEntity(x, y, z);
     if (tileEntity != NULL
-        && (dynamic_pointer_cast<BrewingStandTileEntity>(tileEntity) != NULL)) {
+        && (std::dynamic_pointer_cast<BrewingStandTileEntity>(tileEntity)
+            != NULL)) {
         std::shared_ptr<BrewingStandTileEntity> container =
-            dynamic_pointer_cast<BrewingStandTileEntity>(tileEntity);
+            std::dynamic_pointer_cast<BrewingStandTileEntity>(tileEntity);
         for (int i = 0; i < container->getContainerSize(); i++) {
             std::shared_ptr<ItemInstance> item = container->getItem(i);
             if (item != NULL) {

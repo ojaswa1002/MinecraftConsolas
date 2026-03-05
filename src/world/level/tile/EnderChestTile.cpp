@@ -80,7 +80,7 @@ bool EnderChestTile::use(
     std::shared_ptr<PlayerEnderChestContainer> container =
         player->getEnderChestInventory();
     std::shared_ptr<EnderChestTileEntity> enderChest =
-        dynamic_pointer_cast<EnderChestTileEntity>(
+        std::dynamic_pointer_cast<EnderChestTileEntity>(
             level->getTileEntity(x, y, z)
         );
     if (container == NULL || enderChest == NULL) return true;

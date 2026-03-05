@@ -38,7 +38,8 @@ void EnderDragonRenderer::setupRotations(
 ) {
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
-    std::shared_ptr<EnderDragon> mob = dynamic_pointer_cast<EnderDragon>(_mob);
+    std::shared_ptr<EnderDragon> mob =
+        std::dynamic_pointer_cast<EnderDragon>(_mob);
 
     // 4J - reorganised a bit so we can free allocations
     double      lpComponents[3];
@@ -76,7 +77,8 @@ void EnderDragonRenderer::renderModel(
 ) {
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
-    std::shared_ptr<EnderDragon> mob = dynamic_pointer_cast<EnderDragon>(_mob);
+    std::shared_ptr<EnderDragon> mob =
+        std::dynamic_pointer_cast<EnderDragon>(_mob);
 
     if (mob->dragonDeathTime > 0) {
         float tt = (mob->dragonDeathTime / 200.0f);
@@ -154,7 +156,8 @@ void EnderDragonRenderer::render(
 ) {
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
-    std::shared_ptr<EnderDragon> mob  = dynamic_pointer_cast<EnderDragon>(_mob);
+    std::shared_ptr<EnderDragon> mob =
+        std::dynamic_pointer_cast<EnderDragon>(_mob);
     EnderDragonRenderer::bossInstance = mob;
     if (currentModel != DragonModel::MODEL_ID) {
         model        = new DragonModel(0);
@@ -244,7 +247,8 @@ void EnderDragonRenderer::additionalRendering(
 ) {
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
-    std::shared_ptr<EnderDragon> mob = dynamic_pointer_cast<EnderDragon>(_mob);
+    std::shared_ptr<EnderDragon> mob =
+        std::dynamic_pointer_cast<EnderDragon>(_mob);
     MobRenderer::additionalRendering(mob, a);
     Tesselator* t = Tesselator::getInstance();
 
@@ -304,7 +308,8 @@ int EnderDragonRenderer::prepareArmor(
 ) {
     // 4J - dynamic cast required because we aren't using templates/generics in
     // our version
-    std::shared_ptr<EnderDragon> mob = dynamic_pointer_cast<EnderDragon>(_mob);
+    std::shared_ptr<EnderDragon> mob =
+        std::dynamic_pointer_cast<EnderDragon>(_mob);
 
     if (layer == 1) {
         glDepthFunc(GL_LEQUAL);

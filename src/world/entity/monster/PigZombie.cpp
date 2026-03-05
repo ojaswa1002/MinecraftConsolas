@@ -101,15 +101,15 @@ std::shared_ptr<Entity> PigZombie::findAttackTarget() {
 
 bool PigZombie::hurt(DamageSource* source, int dmg) {
     std::shared_ptr<Entity> sourceEntity = source->getEntity();
-    if (dynamic_pointer_cast<Player>(sourceEntity) != NULL) {
+    if (std::dynamic_pointer_cast<Player>(sourceEntity) != NULL) {
         std::vector<std::shared_ptr<Entity>>* nearby =
             level->getEntities(shared_from_this(), bb->grow(32, 32, 32));
         auto itEnd = nearby->end();
         for (auto it = nearby->begin(); it != itEnd; it++) {
             std::shared_ptr<Entity> e = *it; // nearby->at(i);
-            if (dynamic_pointer_cast<PigZombie>(e) != NULL) {
+            if (std::dynamic_pointer_cast<PigZombie>(e) != NULL) {
                 std::shared_ptr<PigZombie> pigZombie =
-                    dynamic_pointer_cast<PigZombie>(e);
+                    std::dynamic_pointer_cast<PigZombie>(e);
                 pigZombie->alert(sourceEntity);
             }
         }

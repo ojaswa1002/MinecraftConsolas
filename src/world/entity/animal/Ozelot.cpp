@@ -184,7 +184,9 @@ int Ozelot::getDeathLoot() { return Item::leather_Id; }
 
 bool Ozelot::doHurtTarget(std::shared_ptr<Entity> target) {
     return target->hurt(
-        DamageSource::mobAttack(dynamic_pointer_cast<Mob>(shared_from_this())),
+        DamageSource::mobAttack(
+            std::dynamic_pointer_cast<Mob>(shared_from_this())
+        ),
         3
     );
 }
@@ -274,7 +276,7 @@ bool Ozelot::canMate(std::shared_ptr<Animal> animal) {
     if (animal == shared_from_this()) return false;
     if (!isTame()) return false;
 
-    std::shared_ptr<Ozelot> partner = dynamic_pointer_cast<Ozelot>(animal);
+    std::shared_ptr<Ozelot> partner = std::dynamic_pointer_cast<Ozelot>(animal);
     if (partner == NULL) return false;
     if (!partner->isTame()) return false;
 

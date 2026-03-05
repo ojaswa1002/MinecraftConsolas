@@ -201,13 +201,17 @@ bool ChestTile::isFullChest(Level* level, int x, int y, int z) {
 void ChestTile::neighborChanged(Level* level, int x, int y, int z, int type) {
     EntityTile::neighborChanged(level, x, y, z, type);
     std::shared_ptr<ChestTileEntity>(cte) =
-        dynamic_pointer_cast<ChestTileEntity>(level->getTileEntity(x, y, z));
+        std::dynamic_pointer_cast<ChestTileEntity>(
+            level->getTileEntity(x, y, z)
+        );
     if (cte != NULL) cte->clearCache();
 }
 
 void ChestTile::onRemove(Level* level, int x, int y, int z, int id, int data) {
     std::shared_ptr<Container> container =
-        dynamic_pointer_cast<ChestTileEntity>(level->getTileEntity(x, y, z));
+        std::dynamic_pointer_cast<ChestTileEntity>(
+            level->getTileEntity(x, y, z)
+        );
     if (container != NULL) {
         for (unsigned int i = 0; i < container->getContainerSize(); i++) {
             std::shared_ptr<ItemInstance> item = container->getItem(i);
@@ -280,7 +284,9 @@ bool ChestTile::
     }
 
     std::shared_ptr<Container> container =
-        dynamic_pointer_cast<ChestTileEntity>(level->getTileEntity(x, y, z));
+        std::dynamic_pointer_cast<ChestTileEntity>(
+            level->getTileEntity(x, y, z)
+        );
     if (container == NULL) return true;
 
     if (level->isSolidBlockingTile(x, y + 1, z)) return true;
@@ -306,7 +312,7 @@ bool ChestTile::
     if (level->getTile(x - 1, y, z) == id)
         container = std::shared_ptr<Container>(new CompoundContainer(
             IDS_CHEST_LARGE,
-            dynamic_pointer_cast<ChestTileEntity>(
+            std::dynamic_pointer_cast<ChestTileEntity>(
                 level->getTileEntity(x - 1, y, z)
             ),
             container
@@ -315,14 +321,14 @@ bool ChestTile::
         container = std::shared_ptr<Container>(new CompoundContainer(
             IDS_CHEST_LARGE,
             container,
-            dynamic_pointer_cast<ChestTileEntity>(
+            std::dynamic_pointer_cast<ChestTileEntity>(
                 level->getTileEntity(x + 1, y, z)
             )
         ));
     if (level->getTile(x, y, z - 1) == id)
         container = std::shared_ptr<Container>(new CompoundContainer(
             IDS_CHEST_LARGE,
-            dynamic_pointer_cast<ChestTileEntity>(
+            std::dynamic_pointer_cast<ChestTileEntity>(
                 level->getTileEntity(x, y, z - 1)
             ),
             container
@@ -331,7 +337,7 @@ bool ChestTile::
         container = std::shared_ptr<Container>(new CompoundContainer(
             IDS_CHEST_LARGE,
             container,
-            dynamic_pointer_cast<ChestTileEntity>(
+            std::dynamic_pointer_cast<ChestTileEntity>(
                 level->getTileEntity(x, y, z + 1)
             )
         ));
@@ -348,7 +354,7 @@ bool ChestTile::isCatSittingOnChest(Level* level, int x, int y, int z) {
         AABB::newTemp(x, y + 1, z, x + 1, y + 2, z + 1)
     );
     for (auto it = entities->begin(); it != entities->end(); ++it) {
-        std::shared_ptr<Ozelot> ocelot = dynamic_pointer_cast<Ozelot>(*it);
+        std::shared_ptr<Ozelot> ocelot = std::dynamic_pointer_cast<Ozelot>(*it);
         if (ocelot->isSitting()) {
             return true;
         }

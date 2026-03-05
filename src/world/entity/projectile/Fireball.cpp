@@ -299,7 +299,7 @@ void Fireball::onHit(HitResult* res) {
     if (!level->isClientSide) {
         if (res->entity != NULL) {
             DamageSource* damageSource = DamageSource::fireball(
-                dynamic_pointer_cast<Fireball>(shared_from_this()),
+                std::dynamic_pointer_cast<Fireball>(shared_from_this()),
                 owner
             );
             if (res->entity->hurt(damageSource, 6)) {
@@ -366,7 +366,7 @@ bool Fireball::hurt(DamageSource* source, int damage) {
             zPower = zd * 0.1;
         }
         std::shared_ptr<Mob> mob =
-            dynamic_pointer_cast<Mob>(source->getEntity());
+            std::dynamic_pointer_cast<Mob>(source->getEntity());
         if (mob != NULL) {
             owner = mob;
         }

@@ -37,8 +37,8 @@ void PistonMovingPiece::onRemove(
 ) {
     std::shared_ptr<TileEntity> tileEntity = level->getTileEntity(x, y, z);
     if (tileEntity != NULL
-        && dynamic_pointer_cast<PistonPieceEntity>(tileEntity) != NULL) {
-        dynamic_pointer_cast<PistonPieceEntity>(tileEntity)->finalTick();
+        && std::dynamic_pointer_cast<PistonPieceEntity>(tileEntity) != NULL) {
+        std::dynamic_pointer_cast<PistonPieceEntity>(tileEntity)->finalTick();
     } else {
         EntityTile::onRemove(level, x, y, z, id, data);
     }
@@ -163,7 +163,7 @@ void PistonMovingPiece::updateShape(
 ) // 4J added forceData, forceEntity param
 {
     std::shared_ptr<PistonPieceEntity> entity =
-        dynamic_pointer_cast<PistonPieceEntity>(forceEntity);
+        std::dynamic_pointer_cast<PistonPieceEntity>(forceEntity);
     if (entity == NULL) entity = getEntity(level, x, y, z);
     if (entity != NULL) {
         Tile* tile = Tile::tiles[entity->getId()];
@@ -228,8 +228,8 @@ std::shared_ptr<PistonPieceEntity>
 PistonMovingPiece::getEntity(LevelSource* level, int x, int y, int z) {
     std::shared_ptr<TileEntity> tileEntity = level->getTileEntity(x, y, z);
     if (tileEntity != NULL
-        && dynamic_pointer_cast<PistonPieceEntity>(tileEntity) != NULL) {
-        return dynamic_pointer_cast<PistonPieceEntity>(tileEntity);
+        && std::dynamic_pointer_cast<PistonPieceEntity>(tileEntity) != NULL) {
+        return std::dynamic_pointer_cast<PistonPieceEntity>(tileEntity);
     }
     return nullptr;
 }

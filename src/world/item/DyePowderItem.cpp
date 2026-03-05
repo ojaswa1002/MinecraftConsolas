@@ -322,8 +322,8 @@ bool DyePowderItem::interactEnemy(
     std::shared_ptr<ItemInstance> itemInstance,
     std::shared_ptr<Mob>          mob
 ) {
-    if (dynamic_pointer_cast<Sheep>(mob) != NULL) {
-        std::shared_ptr<Sheep> sheep = dynamic_pointer_cast<Sheep>(mob);
+    if (std::dynamic_pointer_cast<Sheep>(mob) != NULL) {
+        std::shared_ptr<Sheep> sheep = std::dynamic_pointer_cast<Sheep>(mob);
         // convert to tile-based color value (0 is white instead of black)
         int newColor =
             ClothTile::getTileDataForItemAuxValue(itemInstance->getAuxValue());

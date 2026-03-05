@@ -568,9 +568,10 @@ Level::Level(
                       // maintain older height for old levels
     this->savedDataStorage = new SavedDataStorage(levelStorage.get());
 
-    std::shared_ptr<Villages> savedVillages = dynamic_pointer_cast<Villages>(
-        savedDataStorage->get(typeid(Villages), Villages::VILLAGE_FILE_ID)
-    );
+    std::shared_ptr<Villages> savedVillages =
+        std::dynamic_pointer_cast<Villages>(
+            savedDataStorage->get(typeid(Villages), Villages::VILLAGE_FILE_ID)
+        );
     if (savedVillages == NULL) {
         villages = std::shared_ptr<Villages>(new Villages(this));
         savedDataStorage->set(Villages::VILLAGE_FILE_ID, villages);
@@ -598,9 +599,10 @@ Level::Level(Level* level, Dimension* dimension) : seaLevel(constSeaLevel) {
                       // maintain older height for old levels
     this->savedDataStorage = new SavedDataStorage(levelStorage.get());
 
-    std::shared_ptr<Villages> savedVillages = dynamic_pointer_cast<Villages>(
-        savedDataStorage->get(typeid(Villages), Villages::VILLAGE_FILE_ID)
-    );
+    std::shared_ptr<Villages> savedVillages =
+        std::dynamic_pointer_cast<Villages>(
+            savedDataStorage->get(typeid(Villages), Villages::VILLAGE_FILE_ID)
+        );
     if (savedVillages == NULL) {
         villages = std::shared_ptr<Villages>(new Villages(this));
         savedDataStorage->set(Villages::VILLAGE_FILE_ID, villages);
@@ -656,9 +658,10 @@ void Level::_init(
         levelStorage; // std::shared_ptr<LevelStorage>(levelStorage);
     this->savedDataStorage = new SavedDataStorage(levelStorage.get());
 
-    std::shared_ptr<Villages> savedVillages = dynamic_pointer_cast<Villages>(
-        savedDataStorage->get(typeid(Villages), Villages::VILLAGE_FILE_ID)
-    );
+    std::shared_ptr<Villages> savedVillages =
+        std::dynamic_pointer_cast<Villages>(
+            savedDataStorage->get(typeid(Villages), Villages::VILLAGE_FILE_ID)
+        );
     if (savedVillages == NULL) {
         villages = std::shared_ptr<Villages>(new Villages(this));
         savedDataStorage->set(Villages::VILLAGE_FILE_ID, villages);
@@ -1669,13 +1672,14 @@ bool Level::addEntity(std::shared_ptr<Entity> e) {
     }
 
     bool forced = false;
-    if (dynamic_pointer_cast<Player>(e) != NULL) {
+    if (std::dynamic_pointer_cast<Player>(e) != NULL) {
         forced = true;
     }
 
     if (forced || hasChunk(xc, zc)) {
-        if (dynamic_pointer_cast<Player>(e) != NULL) {
-            std::shared_ptr<Player> player = dynamic_pointer_cast<Player>(e);
+        if (std::dynamic_pointer_cast<Player>(e) != NULL) {
+            std::shared_ptr<Player> player =
+                std::dynamic_pointer_cast<Player>(e);
 
             // 4J Stu - Added so we don't continually add the player to the
             // players list while they are dead
@@ -1734,10 +1738,10 @@ void Level::removeEntity(std::shared_ptr<Entity> e) {
         e->ride(nullptr);
     }
     e->remove();
-    if (dynamic_pointer_cast<Player>(e) != NULL) {
+    if (std::dynamic_pointer_cast<Player>(e) != NULL) {
         std::vector<std::shared_ptr<Player>>::iterator it    = players.begin();
         std::vector<std::shared_ptr<Player>>::iterator itEnd = players.end();
-        while (it != itEnd && *it != dynamic_pointer_cast<Player>(e)) it++;
+        while (it != itEnd && *it != std::dynamic_pointer_cast<Player>(e)) it++;
 
         if (it != itEnd) {
             players.erase(it);
@@ -1755,10 +1759,10 @@ void Level::removeEntity(std::shared_ptr<Entity> e) {
 void Level::removeEntityImmediately(std::shared_ptr<Entity> e) {
     e->remove();
 
-    if (dynamic_pointer_cast<Player>(e) != NULL) {
+    if (std::dynamic_pointer_cast<Player>(e) != NULL) {
         std::vector<std::shared_ptr<Player>>::iterator it    = players.begin();
         std::vector<std::shared_ptr<Player>>::iterator itEnd = players.end();
-        while (it != itEnd && *it != dynamic_pointer_cast<Player>(e)) it++;
+        while (it != itEnd && *it != std::dynamic_pointer_cast<Player>(e)) it++;
 
         if (it != itEnd) {
             players.erase(it);
@@ -2224,8 +2228,8 @@ void Level::tickEntities() {
         if (!e->removed) {
 #ifndef _FINAL_BUILD
             if (!(app.DebugSettingsOn() && app.GetMobsDontTickEnabled()
-                  && (dynamic_pointer_cast<Mob>(e) != NULL)
-                  && (dynamic_pointer_cast<Player>(e) == NULL)))
+                  && (std::dynamic_pointer_cast<Mob>(e) != NULL)
+                  && (std::dynamic_pointer_cast<Player>(e) == NULL)))
 #endif
             {
                 tick(e);

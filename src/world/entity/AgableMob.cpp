@@ -31,7 +31,7 @@ bool AgableMob::interact(std::shared_ptr<Player> player) {
                                               // only spawn same type
             {
                 std::shared_ptr<AgableMob> offspring = getBreedOffspring(
-                    dynamic_pointer_cast<AgableMob>(shared_from_this())
+                    std::dynamic_pointer_cast<AgableMob>(shared_from_this())
                 );
                 if (offspring != NULL) {
                     offspring->setAge(-20 * 60 * 20);
