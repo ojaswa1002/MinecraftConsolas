@@ -5,7 +5,6 @@
 #include <windows.h>
 
 #include <4J_Profile.h>
-#include <ATGXmlParser.h>
 #include <mss.h>
 
 #include "platform/App_Defines.h"
@@ -61,17 +60,6 @@ C_4JProfile ProfileManager;
 #endif // __PS3__
 CSentientManager SentientManager;
 CXuiStringTable  StringTable;
-
-#ifndef _XBOX_ONE
-ATG::XMLParser::XMLParser() {}
-ATG::XMLParser::~XMLParser() {}
-HRESULT
-ATG::XMLParser::ParseXMLBuffer(CONST CHAR* strBuffer, UINT uBufferSize) {
-    return S_OK;
-}
-VOID ATG::XMLParser::RegisterSAXCallbackInterface(ISAXCallback* pISAXCallback) {
-}
-#endif
 
 bool CSocialManager::IsTitleAllowedToPostAnything() { return false; }
 bool CSocialManager::AreAllUsersAllowedToPostImages() { return false; }

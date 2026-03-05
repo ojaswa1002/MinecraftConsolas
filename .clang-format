@@ -54,7 +54,7 @@ IncludeCategories:
     Priority: 1
   - Regex: "^<(errno.h|io.h|fcntl.h|malloc.h|alloc.h|sys/sys_time.h|sys/types.h|unistd.h|windows.h|d3d11.h)>$"
     Priority: 2
-  - Regex: "^<(4J_Input.h|4J_Profile.h|4J_Render.h|4J_Storage.h|gdraw.h|iggy.h|gdraw_d3d11.h|ps3|iggyexpruntime.h|iggyperfmon.h|mss.h|rrcore.h|ATGXmlParser.h|zlib.h|zconf.h)>$"
+  - Regex: "^<(4J_Input.h|4J_Profile.h|4J_Render.h|4J_Storage.h|gdraw.h|iggy.h|gdraw_d3d11.h|ps3|iggyexpruntime.h|iggyperfmon.h|mss.h|rrcore.h|zlib.h|zconf.h)>$"
     Priority: 3
   - Regex: "^<.*>$"
     Priority: 3
