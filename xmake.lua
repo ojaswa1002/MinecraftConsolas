@@ -1,5 +1,7 @@
 add_rules('mode.debug', 'mode.release')
 
+add_requires('zlib v1.3.2')
+
 -- options
 
 option('debug-menu')
@@ -34,7 +36,8 @@ end
 
 if is_mode('debug') then
     -- never defines _DEBUG; we do not use the debug CRT (under Windows).
-    add_defines('MINECRAFT_DEBUG')
+    -- FIXME: app instance (app.DebugPrintf) has broken.
+    -- add_defines('MINECRAFT_DEBUG')
 end
 
 if is_plat('windows') then
@@ -46,10 +49,8 @@ end
 
 target('client')
     set_kind('binary')
-    add_files(
-        'src/**.cpp',
-        'src/**.c' -- TODO: RM THIS. (zlib)
-    )
+    add_files('src/**.cpp')
+    add_packages('zlib')
     add_links(
         '4J_Render_PC',
         '4J_Storage',
@@ -70,6 +71,5 @@ target('client')
         'src/deps/iggy/include',
         'src/deps/iggy/gdraw',
         'src/deps/mss/include',
-        'src/deps/xml',
-        'src/deps/zlib'
+        'src/deps/xml'
     )
