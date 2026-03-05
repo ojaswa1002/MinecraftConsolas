@@ -2147,7 +2147,7 @@ void StatsCounter::dumpStatsToTTY() {
     }
 }
 
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
 
 // To clear leaderboards set DEBUG_ENABLE_CLEAR_LEADERBOARDS to 1 and set
 // DEBUG_CLEAR_LEADERBOARDS to be the bitmask of what you want to clear

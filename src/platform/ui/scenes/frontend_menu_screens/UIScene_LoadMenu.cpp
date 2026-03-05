@@ -531,7 +531,7 @@ void UIScene_LoadMenu::tick() {
         sscanf_s(szSeed, "%I64d", &m_seed);
 #endif
 
-        // #ifdef _DEBUG
+        // #ifdef MINECRAFT_DEBUG
         // 			// dump out the thumbnail
         // 			HANDLE hThumbnail = CreateFile("GAME:\\thumbnail.png",
         // GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, FILE_FLAG_RANDOM_ACCESS, NULL);
@@ -593,7 +593,7 @@ void UIScene_LoadMenu::tick() {
                     : FALSE;
 
             // turn off creative mode on the save
-            // #ifdef _DEBUG
+            // #ifdef MINECRAFT_DEBUG
             //  			uiHostOptions&=~GAME_HOST_OPTION_BITMASK_BEENINCREATIVE;
             //  			app.SetGameHostOption(eGameHostOption_HasBeenInCreative,
             //  0);

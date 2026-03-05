@@ -204,7 +204,7 @@ void UIScene_DLCOffersMenu::handleInput(
 
     case ACTION_MENU_LEFT:
         /*
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
     static int iTextC=0;
     switch(iTextC)
     {

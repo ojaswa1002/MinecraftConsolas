@@ -152,7 +152,7 @@ BufferedImage::BufferedImage(
 
         const char* pchTextureName = wstringtofilename(name);
 
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
         app.DebugPrintf("\n--- Loading TEXTURE - %s\n\n", pchTextureName);
 #endif
 

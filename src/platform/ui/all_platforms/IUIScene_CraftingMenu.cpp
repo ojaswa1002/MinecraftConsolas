@@ -1369,7 +1369,7 @@ void IUIScene_CraftingMenu::UpdateDescriptionText(bool bCanBeMade) {
             setDescriptionText(wsText.c_str());
         } else {
             /// Missing string!
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
             setDescriptionText(
                 L"This is some placeholder description text about the "
                 L"craftable item."

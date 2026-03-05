@@ -1381,7 +1381,7 @@ void PlayerList::broadcast(
         double yd = y - p->y;
         double zd = z - p->z;
         if (xd * xd + yd * yd + zd * zd < range * range) {
-#if 0 // _DEBUG
+#if 0 // MINECRAFT_DEBUG
 			std::shared_ptr<LevelSoundPacket> SoundPacket= std::dynamic_pointer_cast<LevelSoundPacket>(packet);
 
 			if(SoundPacket)

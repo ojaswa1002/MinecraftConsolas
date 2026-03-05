@@ -9544,7 +9544,7 @@ bool CMinecraftApp::RetrieveNextDLCContent() {
         DLCRequest* pCurrent = *it;
 
         if (pCurrent->eState == e_DLC_ContentState_Idle) {
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
             app.DebugPrintf(
                 "RetrieveNextDLCContent - type = %d\n",
                 pCurrent->dwType

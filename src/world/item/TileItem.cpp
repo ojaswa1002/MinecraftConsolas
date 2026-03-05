@@ -145,7 +145,7 @@ bool TileItem::useOn(
                 // tile->soundType->getStepSound(),
                 // (tile->soundType->getVolume() + 1) / 2,
                 // tile->soundType->getPitch() * 0.8f);
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
                 int iPlaceSound = tile->soundType->getPlaceSound();
                 int iStepSound  = tile->soundType->getStepSound();
 

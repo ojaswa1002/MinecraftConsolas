@@ -446,7 +446,7 @@ void TrackedEntity::broadcast(std::shared_ptr<Packet> packet) {
                         if (otherPlayer != NULL
                             && thisPlayer->IsSameSystem(otherPlayer)) {
                             dontSend = true;
-                            // #ifdef _DEBUG
+                            // #ifdef MINECRAFT_DEBUG
                             // 					std::shared_ptr<SetEntityMotionPacket>
                             // emp=
                             // std::dynamic_pointer_cast<SetEntityMotionPacket>

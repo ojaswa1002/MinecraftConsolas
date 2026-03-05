@@ -231,7 +231,7 @@ std::int64_t ConsoleSchematicFile::applyBlocksAndData(
     int zStart = max(destinationBox->z0, (double)chunk->z * 16);
     int zEnd   = min(destinationBox->z1, (double)((zStart >> 4) << 4) + 16);
 
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
     app.DebugPrintf(
         "Range is (%d,%d,%d) to (%d,%d,%d)\n",
         xStart,
@@ -659,7 +659,7 @@ void ConsoleSchematicFile::applyTileEntities(
         } else {
             e->absMoveTo(targetX, targetY, targetZ, e->yRot, e->xRot);
         }
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
         app.DebugPrintf(
             "Adding entity type %d at (%f,%f,%f)\n",
             e->GetType(),

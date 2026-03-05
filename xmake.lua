@@ -10,9 +10,16 @@ set_warnings('none')
 set_languages('c++14')
 
 add_defines('_LARGE_WORLDS', '_DEBUG_MENUS_ENABLED')
-add_defines('_CRT_NON_CONFORMING_SWPRINTFS', '_CRT_SECURE_NO_WARNINGS')
--- add_defines('_DEBUG')
-add_defines('_WINDOWS64')
+
+if is_mode('debug') then
+    -- never defines _DEBUG; we do not use the debug CRT (under Windows).
+    add_defines('MINECRAFT_DEBUG')
+end
+
+if is_plat('windows') then
+    add_defines('_CRT_NON_CONFORMING_SWPRINTFS', '_CRT_SECURE_NO_WARNINGS')
+    add_defines('_WINDOWS64')
+end
 
 target('client')
     set_kind('binary')

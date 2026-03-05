@@ -83,7 +83,7 @@ typedef struct {
     int  iSound;
     bool bIs3D;
     bool bUseSoundsPitchVal;
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
     char chName[64];
 #endif
 } AUDIO_INFO;
@@ -93,7 +93,7 @@ class SoundEngine : public ConsoleSoundEngine {
 public:
     SoundEngine();
     virtual void destroy();
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
     void GetSoundName(char* szSoundName, int iSound);
 #endif
     virtual void

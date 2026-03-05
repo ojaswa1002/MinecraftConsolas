@@ -378,7 +378,7 @@ void                    UIScene::loadMovie() {
 
     IggyPlayerSetUserdata(swf, this);
 
-// #ifdef _DEBUG
+// #ifdef MINECRAFT_DEBUG
 #if 0
 	IggyMemoryUseInfo memoryInfo;
 	rrbool res;

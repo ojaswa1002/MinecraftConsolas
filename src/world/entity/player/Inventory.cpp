@@ -383,7 +383,7 @@ std::shared_ptr<ItemInstance> Inventory::removeItemNoUpdate(int slot) {
 }
 
 void Inventory::setItem(unsigned int slot, std::shared_ptr<ItemInstance> item) {
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
     if (item != NULL) {
         std::wstring itemstring = item->toString();
         app.DebugPrintf(

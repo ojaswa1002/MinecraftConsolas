@@ -393,7 +393,7 @@ void SoundEngine::init(Options* pOptions) {
         return;
     }
 
-    // #ifdef _DEBUG
+    // #ifdef MINECRAFT_DEBUG
     HMSSENUM    token      = MSS_FIRST;
     char const* Events[1]  = {0};
     S32         EventCount = 0;
@@ -852,7 +852,7 @@ SoundEngine::SoundEngine() {
 
 void SoundEngine::destroy() {}
 
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
 void SoundEngine::GetSoundName(char* szSoundName, int iSound) {
     strcpy((char*)szSoundName, "Minecraft/");
     std::wstring name      = wchSoundNames[iSound];
@@ -917,7 +917,7 @@ void SoundEngine::play(
     AudioInfo.bIs3D              = true;
     AudioInfo.bUseSoundsPitchVal = false;
     AudioInfo.iSound             = iSound + eSFX_MAX;
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
     strncpy(AudioInfo.chName, (char*)szSoundName, 64);
 #endif
 
@@ -975,7 +975,7 @@ void SoundEngine::playUI(int iSound, float volume, float pitch) {
     } else {
         AudioInfo.iSound = iSound;
     }
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
     strncpy(AudioInfo.chName, (char*)szSoundName, 64);
 #endif
 
@@ -1027,7 +1027,7 @@ void SoundEngine::playStreaming(
             20 * 60 * 3
         ); // random->nextInt(20 * 60 * 10) + 20 * 60 * 10;
 
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
         m_iMusicDelay = 0;
 #endif
         Minecraft* pMinecraft = Minecraft::GetInstance();

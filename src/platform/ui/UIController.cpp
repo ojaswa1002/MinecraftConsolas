@@ -610,7 +610,7 @@ IggyLibrary UIController::loadSkin(
         );
 
         delete[] baFile.data;
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
         IggyMemoryUseInfo memoryInfo;
         rrbool            res;
         int               iteration   = 0;

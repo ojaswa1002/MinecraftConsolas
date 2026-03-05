@@ -112,7 +112,7 @@ StringTable::StringTable(PBYTE pbData, DWORD dwSize) {
         bais2.reset();
     } else {
         app.DebugPrintf("Failed to get language\n");
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
         __debugbreak();
 #endif
 

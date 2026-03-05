@@ -82,7 +82,7 @@ public:
     void         flushLeaderboards();
     void         saveLeaderboards();
     static void  setupStatBoards();
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
     void WipeLeaderboards();
 #endif
 

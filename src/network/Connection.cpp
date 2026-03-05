@@ -25,7 +25,7 @@
 class SocketAddress;
 
 // This should always be enabled, except for debugging use
-#ifndef _DEBUG
+#ifndef MINECRAFT_DEBUG
 #define CONNECTION_ENABLE_TIMEOUT_DISCONNECT 1
 #endif
 

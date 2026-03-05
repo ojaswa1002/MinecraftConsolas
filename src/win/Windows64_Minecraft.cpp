@@ -960,7 +960,7 @@ HRESULT InitDevice() {
     app.DebugPrintf("width: %d, height: %d\n", width, height);
 
     UINT createDeviceFlags = 0;
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
     createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
 
@@ -1374,7 +1374,7 @@ int APIENTRY WinMain(
 	DWORD initData=0;
 
 #ifndef _FINAL_BUILD
-#ifndef _DEBUG
+#ifndef MINECRAFT_DEBUG
 #pragma message(__LOC__ "Need to define the _FINAL_BUILD before submission")
 #endif
 #endif

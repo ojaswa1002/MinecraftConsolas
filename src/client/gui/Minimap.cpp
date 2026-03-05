@@ -359,7 +359,7 @@ void Minimap::render(
     glScalef(1, 1, 1);
     // 4J Stu - Don't render the text name, except in debug
     // #if 1
-    // #ifdef _DEBUG
+    // #ifdef MINECRAFT_DEBUG
     //    font->draw(data->id, x, y, 0xff000000);
     // #else
     // 4J Stu - TU-1 hotfix

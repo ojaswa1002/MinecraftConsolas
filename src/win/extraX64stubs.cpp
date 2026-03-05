@@ -955,7 +955,7 @@ void StatsCounter::save(int player, bool force) {}
 void StatsCounter::flushLeaderboards() {}
 void StatsCounter::saveLeaderboards() {}
 void StatsCounter::setupStatBoards() {}
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
 void StatsCounter::WipeLeaderboards() {}
 #endif
 */

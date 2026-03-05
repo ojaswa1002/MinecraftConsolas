@@ -187,7 +187,7 @@ void ApplySchematicRuleDefinition::processSchematic(
         m_locationBox->y1 =
             min((double)Level::maxBuildHeight, m_locationBox->y1);
 
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
         app.DebugPrintf(
             "Applying schematic %ls to chunk (%d,%d)\n",
             m_schematicName.c_str(),
@@ -241,7 +241,7 @@ void ApplySchematicRuleDefinition::processSchematicLighting(
         m_locationBox->y1 =
             min((double)Level::maxBuildHeight, m_locationBox->y1);
 
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
         app.DebugPrintf(
             "Applying schematic %ls to chunk (%d,%d)\n",
             m_schematicName.c_str(),

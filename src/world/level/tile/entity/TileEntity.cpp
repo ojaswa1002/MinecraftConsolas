@@ -152,7 +152,7 @@ std::shared_ptr<TileEntity> TileEntity::loadStatic(CompoundTag* tag) {
     if (entity != NULL) {
         entity->load(tag);
     } else {
-#ifdef _DEBUG
+#ifdef MINECRAFT_DEBUG
         app.DebugPrintf(
             "Skipping TileEntity with id %ls.\n",
             tag->getString(L"id").c_str()
